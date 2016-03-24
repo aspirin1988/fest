@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'TriodPostnajaMedium';
+    src: url('TriodPostnajaMedium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* The following rules are deprecated. */
+
+@font-face {
+    font-family: 'TriodPostnaja';
+    src: url('TriodPostnajaMedium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -1,0 +1,325 @@
+
+.top-slider{
+
+}
+
+.item {
+    height: auto;
+    width: 100%;
+    padding-top: 50px;
+}
+
+.navbar-fixed-top{
+    background: #fff;
+}
+
+.navbar-default .navbar-nav>.active>a{
+    color: #FFF;
+    background-color: #00B7EF;
+
+
+}
+
+.navbar-default .navbar-nav>.active>a:hover{
+    color: #FFF;
+    background-color: #00B7EF;
+}
+
+.top-logo{
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    margin-left: -100px;
+    width: 200px;
+
+}
+
+.top-logo img{
+    width: 100%
+}
+
+.top-slider .item>.carousel-caption{
+    font-family: 'TriodPostnaja';
+    text-shadow: 0 0 5px #0f0f0f, 0 0 10px #0f0f0f, 0 0 15px #0f0f0f ;
+}
+
+.link-1{
+    text-decoration: none;
+    color: #fff;
+}
+
+.link-1:hover{
+    text-decoration: none;
+    color: #092c2e;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff ;
+}
+.user-button img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: -10px;
+    margin-bottom: -14px;
+}
+.top-block{
+    margin-bottom: 20px;
+}
+
+.ort-font{
+    font-family: "TriodPostnaja";
+}
+
+.normal-font{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.news .news-container{
+    border: 1px solid #dddddd;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.news .news-container a{
+    margin: 10px;
+}
+
+.news .news-container h3{
+    margin: 10px;
+    text-align: left;
+}
+
+.news .news-container p {
+    margin: 10px;
+    text-align: justify;
+}
+
+
+.news img{
+    object-fit: cover;
+    width:100%;
+    height: 100%;
+}
+
+.blog{
+
+}
+
+.blog .col-md-6{
+    max-height: 150px;
+    overflow: hidden;
+    margin-bottom:20px;
+}
+
+
+.blog img{
+    height: 150px;
+    width: 150px;
+    margin-right: 20px;
+    object-fit: cover;
+    float: left;
+}
+
+
+.align-right{
+    text-align: right;
+}
+
+.align-right a{
+    display: inline-block;
+}
+
+body>.container{
+    margin-bottom: 20px;
+}
+
+.footer{
+    min-height: 150px;
+    background: #5e5e5e;
+    padding-top: 30px;
+}
+
+.authors{
+    text-align: right;
+    color: #fff;
+}
+
+
+.footer>.container ul li{
+    list-style: none;
+    padding: 5px;
+    text-align: center;
+}
+
+.footer>.container ul li a{
+    color: #FFFFFF;
+
+}
+.social{
+    float: left;
+
+}
+.social a{
+    color: #fff;
+    overflow: hidden;
+    padding-right: 10px;
+    display: inline-block;
+}
+
+.social a:hover{
+    color: #f2dede;
+    text-decoration: none;
+    /*box-shadow: 0 0 5px#fff;*/
+
+}
+
+.top-image{
+    height: 300px;
+    margin-bottom:20px;
+}
+
+.top-image img, .articles-container img, .article-container>img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.article-container>h2{
+    background: #F5F5F5;
+    margin: 0px;
+    padding: 16px;
+    border-radius: 5px 5px 0 0;
+    border: 1px solid #ddd;
+    border-bottom-width: 0;
+}
+
+.article-container>.article{
+    border: 1px solid #ddd;
+    border-radius: 0 0  5px 5px;
+    border-top-width: 0;
+    padding: 20px
+}
+
+.articles-container>.article{
+    border-bottom: 1px solid #ededed;
+    padding-bottom: 15px;
+}
+
+.left-menu{
+    /*padding-top: 20px;
+    border: 1px solid;*/
+}
+
+.left-menu>.panel-group{
+    margin-top:20px;
+}
+
+.left-menu>.panel-group ul{
+    list-style: none;
+}
+
+.left-menu>.panel-group .btn{
+    float: right;
+    margin: -6px;
+    color: #fff;
+}
+
+.article h2{
+    margin: 20px;
+}
+
+.right{
+
+}
+
+.article p{
+    text-align: justify;
+}
+
+.auth{
+    /*padding: 20px;*/
+    padding-right: 30px;
+    color: #777;
+    margin: 0px;
+    display: inline-block;
+}
+
+.auth:hover{
+    /*background: #efefef;*/
+    color: #333;
+    text-decoration: none;
+}
+
+
+.auth:focus{
+    color: #333;
+    text-decoration: none;
+}
+
+.auth:hover img{
+
+    border-radius: 50%;
+    background: #ddd;
+
+}
+
+.auth img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background: #eee;
+    padding: 5px;
+    margin: 5px;
+
+}
+
+
+.login-form .input-group {
+margin-bottom: 10px;
+}
+
+.carousel-inner>.item>.modal-content{
+    box-shadow: none;
+
+}
+
+.vk{
+   /* background: #597DA3;
+    color: #fff;*/
+}
+
+.vk img, .g img{
+    height: 30px;
+}
+
+
+
+
+
+
+
+/* медиазапросы */
+
+@media screen and (min-width: 992px){
+    .news img{
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .top-logo{
+        display: none;
+    }
+}
+
+@media screen and (orientation: landscape){
+    .top-slider .item {
+        height: 100vmin !important;
+        /*position: relative;*/
+    }
+
+    .top-slider .item img{
+        object-fit: cover;
+        height: 100%;
+        width:100%;
+    }
+}
