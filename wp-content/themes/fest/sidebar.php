@@ -37,9 +37,8 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 		//print_r($categories);
 		$in = 'in';
 		foreach ($categories as $key=>$cat) {
-			$args = array('cat' => $cat->term_id, 'post_status' => 'publish');
+			$args = array('posts_per_page' => 7, 'cat' => $cat->term_id, 'post_status' => 'publish');
 			$lastposts = get_posts($args);
-			if ($cat->name != 'Положение') {
 				?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -62,7 +61,6 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 					</div>
 				</div>
 				<?php $in = '';
-			}
 		}?>
 		</div>
 		<script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>

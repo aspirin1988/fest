@@ -7,13 +7,6 @@
     </div>
 </div>
 <div class="container ort-font">
-    <div class="jumbotron ort-font">
-        <h1><?=the_field('Fest-theme')?></h1>
-        <p>Святые, в земле русской просиявшие</p>
-        <p>
-            <a class="btn btn-success btn-lg " href="#" role="button">Регистрация команды</a>
-        </p>
-    </div>
 </div>
 <div class="container">
 <div class="row blog">

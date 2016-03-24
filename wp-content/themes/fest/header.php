@@ -35,9 +35,34 @@ get_currentuserinfo();
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<?php $menu=wp_get_nav_menu_items('Main_menu'); /*print_r($menu)*/; foreach ($menu as $key=>$val) { if (!$val->menu_item_parent){ ?>
-						<li class=""><a href="<?=$val->url?>"><?=$val->title ?></a></li>
+					<?php $menu=wp_get_nav_menu_items('Main_menu'); /*print_r($menu);*/ foreach ($menu as $key=>$val) { if (!$val->menu_item_parent){ ?>
 
+						<?php $sub_menu=[];
+							foreach ($menu as $key1=>$val1)
+							{
+								if ($val->ID==$val1->menu_item_parent)
+								{
+									$sub_menu[]=$val1;
+								}
+							}
+						if(count($sub_menu))
+						{
+							?>
+							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="<?=$val->url?>"><?=$val->title ?></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Новости</a></li>
+								<li><a href="#">Статьи</a></li>
+								<li><a href="#">Документы</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Блоги</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Галерея</a></li>
+							</ul>
+					<?php	}
+						else {?>
+							<li class=""><a href="<?=$val->url?>"><?=$val->title ?></a>
+						<?php }?>
+						</li>
 					<?php }} ?>
 
 				</ul>
