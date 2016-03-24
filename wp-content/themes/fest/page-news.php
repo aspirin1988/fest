@@ -21,14 +21,14 @@ get_header();
         <p style="text-align: justify"><?php the_field('regulations_text');?></p>
     </div>
 <div class="container">
-    <div class="row news">
+    <div class="col-md-9 row news">
 
 <?php
 $args = array( 'cat'=> 2 );
 $lastposts = get_posts( $args );
 foreach( $lastposts as $post ){ setup_postdata($post);
     ?>
-    <div class="col-md-5">
+    <div class="col-md-6">
     <div class="news-container">
     <h2 style="text-align: center;"><a  href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
     <?php
