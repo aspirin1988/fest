@@ -43,8 +43,11 @@ foreach( $lastposts as $post ){ setup_postdata($post);
     echo $res;?>
     </div>
     </div>
+
 <?php
 }
+global $category_sidebar;
+$category_sidebar= get_the_category()[0];
 wp_reset_postdata();
 ?>
 

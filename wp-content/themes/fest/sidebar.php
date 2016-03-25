@@ -34,7 +34,9 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 			// полный список параметров смотрите в описании функции http://wp-kama.ru/function/get_terms
 		);
 		$categories = get_categories( $args );
-		print_r($categories);
+//		print_r($cate$gories);
+
+		$category_sidebar=$GLOBALS['category_sidebar'];
 		$in = 'in';
 		foreach ($categories as $key=>$cat) {
 			$args = array('posts_per_page' => 7, 'cat' => $cat->term_id, 'post_status' => 'publish');
@@ -49,7 +51,7 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 							<a class="btn btn-primary btn-sm" href="http://fest.net/index.php/<?=$cat->category_nicename ?>" role="button">Подробнее</a>
 						</h4>
 					</div>
-					<div id="collapse<?= $cat->name ?>" class="panel-collapse collapse <?= $in ?>">
+					<div id="collapse<?= $cat->name ?>" class="panel-collapse collapse <?php if ($category_sidebar->term_id==$cat->term_id) {echo $in; $in = '';} ?>">
 						<div class="panel-body">
 							<ul>
 								<?php foreach ($lastposts as $post) {
@@ -60,7 +62,7 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 						</div>
 					</div>
 				</div>
-				<?php $in = '';
+				<?php
 		}?>
 		</div>
 		<script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>
