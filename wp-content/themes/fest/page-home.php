@@ -93,7 +93,7 @@ $new_menu=	rem($menu,$item);
         <h2><?php the_field('regulations_title');?></h2>
         <p style="text-align: justify"><?php the_field('regulations_text');?></p>
     </div>
-    <h2><?php the_field('News_title');?> <a class="btn btn-success" href="<?php $category_id = get_cat_ID( 'Новости' );$category_link = get_category_link( $category_id ); echo $category_link; ?>" role="button">Все новости</a></h2>
+    <h2><?php the_field('News_title');?> <a class="btn btn-success" href="/index.php/news/" role="button">Все новости</a></h2>
     <div class="row news">
 <?php
 $args = array( 'posts_per_page' => 3, 'cat'=> 2 );
@@ -113,7 +113,7 @@ wp_reset_postdata();
 ?>
     </div>
     <hr>
-    <h2><?php the_field('Blogs_title');?> <a class="btn btn-success" href="<?php $category_id = get_cat_ID( 'Новости' );$category_link = get_category_link( $category_id ); echo $category_link; ?>" role="button">Все блоги</a></h2>
+    <h2><?php the_field('Blogs_title');?> <a class="btn btn-success" href="/index.php/blogs/" role="button">Все блоги</a></h2>
     <div class="row blog">
 
         <?php

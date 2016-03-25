@@ -61,8 +61,6 @@ get_currentuserinfo();
 					<?php }} ?>
 
 				</ul>
-
-
 							<?php if (!$current_user->user_login) {
 							?>
 								<ul class="nav navbar-nav navbar-right">
