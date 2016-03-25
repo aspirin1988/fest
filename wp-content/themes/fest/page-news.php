@@ -33,8 +33,8 @@ foreach( $lastposts as $post ){ setup_postdata($post);
     <h2 style="text-align: center;"><a  href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
     <?php
     echo get_the_post_thumbnail( $post->id, 'medium');
-    $tr= get_the_content();
-    $j=128;
+    $tr=strip_tags(get_the_content());
+    $j=255;
     while ($tr[$j-5]!=' ') {
         $res = substr($tr, 0,$j-1) . '...';
         if ($j>=strlen($tr)) break;

@@ -105,8 +105,15 @@ foreach( $lastposts as $post ){ setup_postdata($post);
     <div class="news-container">
     <h3 style="text-align: center;"><a  href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
     <?php
-   echo get_the_post_thumbnail( $post->id, 'medium');
-    //the_content();
+       echo get_the_post_thumbnail( $post->id, 'medium');
+        $tr= get_the_content();
+        $j=128;
+        while ($tr[$j-5]!=' ') {
+            $res = substr($tr, 0,$j-1) . '...';
+            if ($j>=strlen($tr)) break;
+            $j++;
+        }
+        echo $res;
     echo  '</div></div>';
 }
 wp_reset_postdata();
@@ -124,7 +131,14 @@ wp_reset_postdata();
         <div class="col-md-6">
             <?php echo get_the_post_thumbnail( $post->id, 'medium');?><h3 style="text-align: center;"><a  href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
             <?php
-
+            $tr= strip_tags(get_the_content());
+            $j=128;
+            while ($tr[$j-5]!=' ') {
+                $res = substr($tr, 0,$j-1) . '...';
+                if ($j>=strlen($tr)) break;
+                $j++;
+            }
+            echo $res;
             echo  '</div>';
             }
             wp_reset_postdata();

@@ -26,7 +26,8 @@ define('DB_NAME', 'fest');
 define('DB_USER', 'fest');
 
 /** MySQL database password */
-define('DB_PASSWORD', '123456');
+define('DB_PASSWORD', 'jShdvSNBrTEB3fVZ');
+//define('DB_PASSWORD', '123456');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');

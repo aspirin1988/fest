@@ -48,7 +48,7 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?= $cat->name ?>">
 								<?= $cat->name ?>
 							</a>
-							<a class="btn btn-primary btn-sm" href="http://fest.net/index.php/<?=$cat->category_nicename ?>" role="button">Подробнее</a>
+							<a class="btn btn-primary btn-sm" href="/index.php/<?=$cat->category_nicename ?>" role="button">Подробнее</a>
 						</h4>
 					</div>
 					<div id="collapse<?= $cat->name ?>" class="panel-collapse collapse <?php if ($category_sidebar->term_id==$cat->term_id) {echo $in; $in = '';} ?>">
