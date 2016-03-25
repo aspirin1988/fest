@@ -50,13 +50,8 @@ get_currentuserinfo();
 							?>
 							<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="<?=$val->url?>"><?=$val->title ?></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Новости</a></li>
-								<li><a href="#">Статьи</a></li>
-								<li><a href="#">Документы</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Блоги</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Галерея</a></li>
+								<?php foreach ($sub_menu as $key1=>$val1)
+								{ echo '<li><a  href="'.$val1->url.'">'.$val1->title.'</a></li>'; }?>
 							</ul>
 					<?php	}
 						else {?>

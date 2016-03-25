@@ -22,7 +22,10 @@ get_header();?>
 			get_template_part( 'template-parts/content', get_post_format() );
 		endwhile; // End of the loop.
 		?>
-			<?php get_sidebar();?>
+			<?php
+				global $category_sidebar;
+				$category_sidebar= get_the_category()[0];
+				get_sidebar();?>
 			</div>
 		</div>
 
