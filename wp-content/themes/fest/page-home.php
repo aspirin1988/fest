@@ -84,7 +84,7 @@ $new_menu=	rem($menu,$item);
         <h1><?php the_field('Fest-theme');?></h1>
         <p><?php the_field('Label-fest');?></p>
         <p>
-            <a class="btn btn-primary btn-lg " href="/index.php/post/" role="button">Подробнее</a>
+            <a class="btn btn-primary btn-lg " href="/index.php/2016/03/24/polojenie/" role="button">Положение</a>
             <a class="btn btn-success btn-lg " href  ="#" role="button">Регистрация команды</a>
         </p>
     </div>
@@ -101,21 +101,30 @@ $lastposts = get_posts( $args );
 //print_r($lastposts);
 foreach( $lastposts as $post ){ setup_postdata($post);
     ?>
+
     <div class="col-md-4">
-    <div class="news-container">
-    <h3 style="text-align: center;"><a  href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+        <div class="news-container">
+        <?php echo get_the_post_thumbnail( $post->id, 'medium');?>
+            <h3><a  href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+            <p>
+                <?php
+                $tr='';
+                $tr= strip_tags(get_the_content());
+                $j=256;
+                while ($tr[$j-5]!=' ') {
+                    $res = substr($tr, 0,$j-1) . '...';
+                    if ($j>=strlen($tr)) break;
+                    $j++;
+                }
+                echo $res;
+                ?>
+            </p>
+            <a class="btn btn-primary" href="<?php the_permalink(); ?>">подробнее</a>
+        </div>
+    </div>
+
+
     <?php
-       echo get_the_post_thumbnail( $post->id, 'medium');
-        $tr='';
-        $tr= strip_tags(get_the_content());
-        $j=256;
-        while ($tr[$j-5]!=' ') {
-            $res = substr($tr, 0,$j-1) . '...';
-            if ($j>=strlen($tr)) break;
-            $j++;
-        }
-        echo $res;
-    echo  '</div></div>';
 }
 wp_reset_postdata();
 ?>

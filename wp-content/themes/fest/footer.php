@@ -7,34 +7,17 @@
     <div class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <?php $menu=wp_get_nav_menu_items('Main_menu'); /*print_r($menu);*/ foreach ($menu as $key=>$val) { if ($val->title!='Материалы'){ ?>
+                <div class="col-md-2">
                     <ul>
-                        <li><a href="">пункт меню</a></li>
-                        <li><a href="">пункт меню</a></li>
-                        <li><a href="">пункт меню</a></li>
-                        <li><a href="">пункт меню</a></li>
+                        <li class=""><a href="<?=$val->url?>"><?=$val->title ?></a>
+                    </li>
                     </ul>
                 </div>
-                <div class="col-md-4">
-                    <ul>
-                        <li><a href="">пункт меню</a></li>
-                        <li><a href="">пункт меню</a></li>
-                        <li><a href="">пункт меню</a></li>
-                        <li><a href="">пункт меню</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul>
-                        <li><a href="">пункт меню</a></li>
-                        <li><a href="">пункт меню</a></li>
-                        <li><a href="">пункт меню</a></li>
-                        <li><a href="">пункт меню</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="social">
-                <a target="_blank"  href="https://vk.com/fest_dss"><img src="<?php bloginfo('template_directory');?>/public/img/1456923485_vkontakte.svg" alt=""> Группа ВКонтакте</a>
-            </div>
+                <?php }} ?>
+            <!--<div class="social">
+                <a target="_blank"  href="https://vk.com/fest_dss"><img src="<?php /*bloginfo('template_directory');*/?>/public/img/1456923485_vkontakte.svg" alt=""> Группа ВКонтакте</a>
+            </div>-->
             <!--<div class="authors">
                 <p>Авторы: John smith, etc</p>
                 <p>Этот сайт работает на wordpress </p>
@@ -70,8 +53,7 @@
                                     <input type="password" name="pwd" class="form-control" placeholder="Пароль">
                                 </div>
                                 <p>Или войдите через:</p>
-                                <?php echo class_exists('VK_api') ? VK_api::get_vk_login() : null; ?>
-                                <div id="vkapi_login_button" onclick="VK.Auth.login(onSignon)"  class="btn btn-primary vk"><img src="<?php bloginfo('template_directory');?>/public/img/vk.svg" alt=""></div>
+                                <div  id="vkapi_login_button" onclick="VK.Auth.login(onSignon)"  class=" vkapi_vk_login btn btn-primary vk"><img src="<?php bloginfo('template_directory');?>/public/img/vk.svg" alt=""></div>
                                 <button  class="btn btn-default g"><img src="<?php bloginfo('template_directory');?>/public/img/g+.svg" alt=""></button>
                             </form>
                         </div>

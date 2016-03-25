@@ -3,8 +3,21 @@ global $current_user;
 get_currentuserinfo();
 //print_r($current_user);
 get_header();
-$args = array( 'cat'=> 3 );
+global $url;
+$url = '/index.php/blogs/';
+$page=6;
+global $count_posts;
+global $cat_id;
+$cat_id=3;
+$count_posts = get_category($cat_id)->category_count;
+global$page_count;
+$page_count= ceil($count_posts / $page);
+echo $page_count;
+global $offsett_post;
+$offsett_post= $wp_query->query_vars['page']*$page;
+$args = array( 'cat'=> $cat_id ,'numberposts'=>$page ,'offset'=>$offsett_post );
 ?>
+
     <div class="top-image">
         <img src="<?=$GLOBALS['header']['path']?>" alt="logo">
         <div class="top-logo">
@@ -18,8 +31,14 @@ $args = array( 'cat'=> 3 );
 
         <div style="margin-bottom: 20px;" class="ort-font">
             <h2><?=the_title()?></h2>
-            <p style="text-align: justify"><?php the_field('regulations_text');?></p>
         </div>
+        <?php if ($GLOBALS['page_count']>=2){?>
+        <ul class="pagination">
+            <?php for ($i=1; $i<=$GLOBALS['page_count']; $i++){?>
+                <li><a href="<?php echo $GLOBALS['url'].($i-1); ?>"><?=$i?></a></li>
+            <?php } ?>
+        </ul>
+        <?php } ?>
         <div class="container">
             <div class="col-md-9 articles-container">
                 <?php
@@ -57,7 +76,13 @@ $args = array( 'cat'=> 3 );
             </div>
             <?php get_sidebar();?>
         </div>
-
+        <?php if ($GLOBALS['page_count']>=2){?>
+        <ul class="pagination">
+            <?php for ($i=1; $i<=$GLOBALS['page_count']; $i++){?>
+                <li><a href="<?php echo $GLOBALS['url'].($i-1); ?>"><?=$i?></a></li>
+            <?php } ?>
+        </ul>
+        <?php } ?>
     </div>
 
 <?php get_footer(); ?>

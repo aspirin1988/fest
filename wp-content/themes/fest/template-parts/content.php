@@ -11,7 +11,9 @@
 
 		<div class="col-md-9 article-container">
 			<h2 style="text-align: center;"><a  href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-			<img src="<?=get_the_post_thumbnail_url( get_the_ID(), 'full')?>" alt="df">
+			<?php $img=''; $img=get_the_post_thumbnail_url( get_the_ID(), 'full'); if ($img) {?>
+			<img src="<?=$img?>" alt="df">
+			<?php }?>
 			<div class="article  normal-font">
 				<?php the_content( sprintf(
 				/* translators: %s: Name of current post. */
