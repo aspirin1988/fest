@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="social">
-                <a target="_blank" href="https://vk.com/fest_dss"><img src="<?php bloginfo('template_directory');?>/public/img/1456923485_vkontakte.svg" alt=""> Группа ВКонтакте</a>
+                <a target="_blank"  href="https://vk.com/fest_dss"><img src="<?php bloginfo('template_directory');?>/public/img/1456923485_vkontakte.svg" alt=""> Группа ВКонтакте</a>
             </div>
             <!--<div class="authors">
                 <p>Авторы: John smith, etc</p>
@@ -70,7 +70,8 @@
                                     <input type="password" name="pwd" class="form-control" placeholder="Пароль">
                                 </div>
                                 <p>Или войдите через:</p>
-                                <button  class="btn btn-primary vk"><img src="<?php bloginfo('template_directory');?>/public/img/vk.svg" alt=""></button>
+                                <?php echo class_exists('VK_api') ? VK_api::get_vk_login() : null; ?>
+                                <div id="vkapi_login_button" onclick="VK.Auth.login(onSignon)"  class="btn btn-primary vk"><img src="<?php bloginfo('template_directory');?>/public/img/vk.svg" alt=""></div>
                                 <button  class="btn btn-default g"><img src="<?php bloginfo('template_directory');?>/public/img/g+.svg" alt=""></button>
                             </form>
                         </div>
@@ -242,6 +243,34 @@
 
     </div>
 </div>
+
+
+<div id="vkapi_body">			<div id="vk_api_transport" style="position: absolute; top: -10000px;"><script type="text/javascript" src="https://vk.com/js/api/openapi.js" async=""></script></div>
+    <script type="text/javascript">
+        jQuery(function () {
+            window.vkAsyncInit = function () {
+                VK.init({
+                    apiId: 4296087
+                });
+                if (typeof onChangePlusVK !== 'undefined')
+                    VK.Observer.subscribe('widgets.comments.new_comment', onChangePlusVK);
+                if (typeof onChangeMinusVK !== 'undefined')
+                    VK.Observer.subscribe('widgets.comments.delete_comment', onChangeMinusVK);
+                if (!window.vkapi_vk) {
+                    window.vkapi_vk = true;
+                    jQuery(document).trigger('vkapi_vk');
+                }
+            };
+
+            var el = document.createElement("script");
+            el.type = "text/javascript";
+            el.src = "https://vk.com/js/api/openapi.js";
+            el.async = true;
+            document.getElementById("vk_api_transport").appendChild(el);
+        });
+    </script>
+</div>
+
 <!-- end auth modal -->
 </body>
 </html>

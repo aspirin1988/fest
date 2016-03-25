@@ -106,8 +106,9 @@ foreach( $lastposts as $post ){ setup_postdata($post);
     <h3 style="text-align: center;"><a  href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
     <?php
        echo get_the_post_thumbnail( $post->id, 'medium');
-        $tr= get_the_content();
-        $j=128;
+        $tr='';
+        $tr= strip_tags(get_the_content());
+        $j=256;
         while ($tr[$j-5]!=' ') {
             $res = substr($tr, 0,$j-1) . '...';
             if ($j>=strlen($tr)) break;
@@ -124,15 +125,26 @@ wp_reset_postdata();
     <div class="row blog">
 
         <?php
-        $args = array( 'posts_per_page' => 6, 'cat'=> 3 );
+        $args = array( 'posts_per_page' =>4, 'cat'=> 3 );
         $lastposts = get_posts( $args );
         foreach( $lastposts as $post ){ setup_postdata($post);
         ?>
         <div class="col-md-6">
-            <?php echo get_the_post_thumbnail( $post->id, 'medium');?><h3 style="text-align: center;"><a  href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+            <?php echo get_the_post_thumbnail( $post->id, 'medium');?><h3 style="text-align: center;"><a  href="<?php the_permalink(); ?>"><?php
+                    $res='';
+                    $title='';
+                    $title=get_the_title();
+                    $j=25;
+                    while ($title[$j]!=' ') {
+                        $res = substr($title, 0,$j+1);
+                        if ($j>=strlen($tr)) break;
+                        $j++;
+                    }
+                    echo $res; ?></a></h3>
             <?php
+            $tr='';
             $tr= strip_tags(get_the_content());
-            $j=128;
+            $j=356;
             while ($tr[$j-5]!=' ') {
                 $res = substr($tr, 0,$j-1) . '...';
                 if ($j>=strlen($tr)) break;

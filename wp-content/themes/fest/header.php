@@ -13,10 +13,20 @@ get_currentuserinfo();
 	<link rel="stylesheet" href="<?php bloginfo('template_directory');?>/public/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php bloginfo('template_directory');?>/public/fonts/triod.css">
 	<link rel="stylesheet" href="<?php bloginfo('template_directory');?>/public/css/my.css">
+	<script src="<?php bloginfo('template_directory');?>/public/js/jquery.min.js"></script>
+	<script type="text/javascript" src="<?php bloginfo('template_directory');?>/public/js/bootstrap.min.js"></script>
+	<meta property="vk:app_id" content="4296087">
+	<script type="text/javascript" src="http://fest-dss.kz/wp-includes/js/jquery/jquery.js?ver=1.11.3"></script>
+	<script type="text/javascript" src="http://fest-dss.kz/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1"></script>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var vkapi = {"wpurl":"http:\/\/fest-dss.kz"};
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="http://fest-dss.kz/wp-content/plugins/vkontakte-api/js/callback.js?ver=4.4.2"></script>
+	<script type="text/javascript" src="http://fest-dss.kz/wp-content/plugins/vkontakte-api/js/callback.js?ver=4.4.2"></script>
+	<meta name="robots" content="noindex,follow">
 </head>
-<body>
-<script src="<?php bloginfo('template_directory');?>/public/js/jquery.min.js"></script>
-<script type="text/javascript" src="<?php bloginfo('template_directory');?>/public/js/bootstrap.min.js"></script>
 <header class="top-block">
 	<body class="ort-font">
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,7 +86,7 @@ get_currentuserinfo();
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown user-button">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<?php echo get_avatar( $current_user->user_ID); echo	$current_user->user_login; ?>
+								<?php echo get_avatar( $current_user->user_ID); echo	$current_user->display_name; ?>
 							 <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="/wp-admin">Профиль</a></li>
