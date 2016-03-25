@@ -34,7 +34,7 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 			// полный список параметров смотрите в описании функции http://wp-kama.ru/function/get_terms
 		);
 		$categories = get_categories( $args );
-		//print_r($categories);
+		print_r($categories);
 		$in = 'in';
 		foreach ($categories as $key=>$cat) {
 			$args = array('posts_per_page' => 7, 'cat' => $cat->term_id, 'post_status' => 'publish');
@@ -46,7 +46,7 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?= $cat->name ?>">
 								<?= $cat->name ?>
 							</a>
-							<a class="btn btn-primary btn-sm" href="#" role="button">Подробнее</a>
+							<a class="btn btn-primary btn-sm" href="http://fest.net/index.php/<?=$cat->category_nicename ?>" role="button">Подробнее</a>
 						</h4>
 					</div>
 					<div id="collapse<?= $cat->name ?>" class="panel-collapse collapse <?= $in ?>">
