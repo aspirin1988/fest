@@ -143,21 +143,23 @@ wp_reset_postdata();
                     $res='';
                     $title='';
                     $title=get_the_title();
-                    $j=25;
-                    while ($title[$j]!=' ') {
-                        $res = substr($title, 0,$j+1);
-                        if ($j>=strlen($tr)) break;
-                        $j++;
+                    $j=30;
+                    if (mb_strlen($title)>$j) {
+                        $res=mb_substr($title,0,$j).'...';
+                    }
+                    else{
+                        $res=$title;
                     }
                     echo $res; ?></a></h3>
             <?php
             $tr='';
             $tr= strip_tags(get_the_content());
-            $j=356;
-            while ($tr[$j-5]!=' ') {
-                $res = substr($tr, 0,$j-1) . '...';
-                if ($j>=strlen($tr)) break;
-                $j++;
+            $j=255;
+            if (mb_strlen($tr)>$j) {
+                $res=mb_substr($tr,0,$j).'...';
+            }
+            else{
+                $res=$tr;
             }
             echo $res;
             echo  '</div>';
@@ -170,4 +172,8 @@ wp_reset_postdata();
 
         </div>
     </div>
+    <div class="map">
+        <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=9xhfaNoKpgXi1cE4pDo5w2cWLjg4k43b&width=100%&height=500&lang=ru_RU&sourceType=constructor"></script>
+    </div>
+
 <?php get_footer(); ?>

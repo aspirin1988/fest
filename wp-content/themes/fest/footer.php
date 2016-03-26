@@ -1,9 +1,5 @@
 <?php //wp_footer(); ?>
 <footer>
-    <div class="map">
-        <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=9xhfaNoKpgXi1cE4pDo5w2cWLjg4k43b&width=100%&height=500&lang=ru_RU&sourceType=constructor"></script>
-    </div>
-
     <div class="footer">
         <div class="container">
             <div class="row">

@@ -54,10 +54,11 @@ $args = array( 'cat'=> $cat_id ,'numberposts'=>$page ,'offset'=>$offsett_post );
                             <p>
                                 <?php $tr=strip_tags(get_the_content());
                                 $j=255;
-                                while ($tr[$j-5]!=' ') {
-                                    $res = substr($tr, 0,$j-1) . '...';
-                                    if ($j>=strlen($tr)) break;
-                                    $j++;
+                                if (mb_strlen($tr)>$j) {
+                                    $res=mb_substr($tr,0,$j).'...';
+                                }
+                                else{
+                                    $res=$tr;
                                 }
                                 echo $res;?>
                             </p>
