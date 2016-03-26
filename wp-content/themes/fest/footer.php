@@ -1,26 +1,5 @@
 <?php //wp_footer(); ?>
-<footer>
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <?php $menu=wp_get_nav_menu_items('Main_menu'); /*print_r($menu);*/ foreach ($menu as $key=>$val) { if ($val->title!='Материалы'){ ?>
-                <div class="col-md-2">
-                    <ul>
-                        <li class=""><a href="<?=$val->url?>"><?=$val->title ?></a>
-                    </li>
-                    </ul>
-                </div>
-                <?php }} ?>
-            <!--<div class="social">
-                <a target="_blank"  href="https://vk.com/fest_dss"><img src="<?php /*bloginfo('template_directory');*/?>/public/img/1456923485_vkontakte.svg" alt=""> Группа ВКонтакте</a>
-            </div>-->
-            <!--<div class="authors">
-                <p>Авторы: John smith, etc</p>
-                <p>Этот сайт работает на wordpress </p>
-            </div>-->
-        </div>
-    </div>
-</footer>
+
 <!-- auth modal -->
 <div id="auth-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-sm normal-font">
@@ -221,8 +200,6 @@
 
     </div>
 </div>
-
-
 <div id="vkapi_body">			<div id="vk_api_transport" style="position: absolute; top: -10000px;"><script type="text/javascript" src="https://vk.com/js/api/openapi.js" async=""></script></div>
     <script type="text/javascript">
         jQuery(function () {
@@ -248,7 +225,28 @@
         });
     </script>
 </div>
-
+<footer>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <?php $menu=wp_get_nav_menu_items('Main_menu'); /*print_r($menu);*/ foreach ($menu as $key=>$val) { if ($val->title!='Материалы'){ ?>
+                    <div class="col-md-2">
+                        <ul>
+                            <li class=""><a href="<?=$val->url?>"><?=$val->title ?></a>
+                            </li>
+                        </ul>
+                    </div>
+                <?php }} ?>
+                <!--<div class="social">
+                <a target="_blank"  href="https://vk.com/fest_dss"><img src="<?php /*bloginfo('template_directory');*/?>/public/img/1456923485_vkontakte.svg" alt=""> Группа ВКонтакте</a>
+            </div>-->
+                <!--<div class="authors">
+                    <p>Авторы: John smith, etc</p>
+                    <p>Этот сайт работает на wordpress </p>
+                </div>-->
+            </div>
+        </div>
+</footer>
 <!-- end auth modal -->
 </body>
 </html>

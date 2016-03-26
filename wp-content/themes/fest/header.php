@@ -27,9 +27,9 @@ get_currentuserinfo();
 	<script type="text/javascript" src="http://fest-dss.kz/wp-content/plugins/vkontakte-api/js/callback.js?ver=4.4.2"></script>
 	<meta name="robots" content="noindex,follow">
 </head>
-<header class="top-block">
-	<body class="ort-font">
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<body class="ort-font">
+	<header class="top-block">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -102,5 +102,6 @@ get_currentuserinfo();
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
+	</header>
 <?php //wp_head(); ?>
 
