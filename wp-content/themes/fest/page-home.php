@@ -1,7 +1,15 @@
 <?php include_once ('gallery.php');
 get_header();
+
+global $current_user;
+get_currentuserinfo();
+//add_group('test','test');
+//reg_group(1,$current_user->ID);
+
+
+
 ?>
-    <div id="carousel-top-generic" class="carousel slide top-slider" data-ride="carousel">
+    <div id="carousel-top-generic" class="top-block carousel slide top-slider" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#carousel-top-generic" data-slide-to="0" class="active"></li>
@@ -22,21 +30,20 @@ get_header();
             </div>
             <?php $active=''; } ?>
     </div>
-
+        <div class="top-logo">
+            <img src="<?php bloginfo('template_directory');?>/public/img/Logo.png" alt="logo">
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-top-generic" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-top-generic" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
     </div>
 
-    <div class="top-logo">
-        <img src="<?php bloginfo('template_directory');?>/public/img/Logo.png" alt="logo">
-    </div>
-    <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-top-generic" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a class="right carousel-control" href="#carousel-top-generic" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-    </div>
-    </header>
+
+
 <?php $menu=wp_get_nav_menu_items('Main_menu'); /*print_r($menu);*/
 
 
@@ -88,10 +95,12 @@ $new_menu=	rem($menu,$item);
             <a class="btn btn-success btn-lg " href  ="#" role="button">Регистрация команды</a>
         </p>
     </div>
-
     <div style="margin-bottom: 20px;" class="ort-font">
         <h2><?php the_field('regulations_title');?></h2>
         <p style="text-align: justify"><?php the_field('regulations_text');?></p>
+        <p class="align-right">
+            <a class="btn btn-primary " href="<?php the_field('regulations_url');?>" role="button">Подробнее</a>
+        </p>
     </div>
     <h2><?php the_field('News_title');?> <a class="btn btn-success" href="/index.php/news/" role="button">Все новости</a></h2>
     <div class="row news">
@@ -139,11 +148,11 @@ wp_reset_postdata();
         foreach( $lastposts as $post ){ setup_postdata($post);
         ?>
         <div class="col-md-6">
-            <?php echo get_the_post_thumbnail( $post->id, 'medium');?><h3 style="text-align: center;"><a  href="<?php the_permalink(); ?>"><?php
+           <div class="col-sm-4"><?php echo get_the_post_thumbnail( $post->id, 'medium');?></div><div class="col-sm-8" ><h3 style="text-align: center;"><a  href="<?php the_permalink(); ?>"><?php
                     $res='';
                     $title='';
                     $title=get_the_title();
-                    $j=30;
+                    $j=22;
                     if (mb_strlen($title)>$j) {
                         $res=mb_substr($title,0,$j).'...';
                     }
@@ -154,7 +163,7 @@ wp_reset_postdata();
             <?php
             $tr='';
             $tr= strip_tags(get_the_content());
-            $j=255;
+            $j=200;
             if (mb_strlen($tr)>$j) {
                 $res=mb_substr($tr,0,$j).'...';
             }
@@ -162,15 +171,14 @@ wp_reset_postdata();
                 $res=$tr;
             }
             echo $res;
-            echo  '</div>';
+            echo  '</div></div>';
             }
             wp_reset_postdata();
             ?>
-
+            </div>
         </div>
-        <div class="row blog">
 
-        </div>
+    </div>
     </div>
     <div class="map">
         <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=9xhfaNoKpgXi1cE4pDo5w2cWLjg4k43b&width=100%&height=500&lang=ru_RU&sourceType=constructor"></script>

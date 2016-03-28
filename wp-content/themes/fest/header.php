@@ -3,6 +3,9 @@ $GLOBALS['logo']=get_logo('this_logo');
 $GLOBALS['header']=get_logo('this_header');
 global $current_user;
 get_currentuserinfo();
+global $user_gr;
+$user_gr=get_user_gr($current_user->ID);
+$user_gr=$user_gr;
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +31,7 @@ get_currentuserinfo();
 	<meta name="robots" content="noindex,follow">
 </head>
 <body class="ort-font">
-	<header class="top-block">
+	<header >
 		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -86,7 +89,7 @@ get_currentuserinfo();
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown user-button">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<?php echo get_avatar( $current_user->user_ID); echo	$current_user->display_name; ?>
+								<?php echo get_avatar( $current_user->user_ID); echo	$current_user->display_name; if($user_gr->id){echo '['.$user_gr->name.']';} ?>
 							 <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="/wp-admin">Профиль</a></li>

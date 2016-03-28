@@ -1,0 +1,31 @@
+<div class="fields_header">
+    <form method="post" name="add_gr" action="" >
+        <div style="width: 50%">
+            <label for="gr_name">Название</label>
+            <input id="gr_name" type="text" name="name">
+            <label for="gr_desc">Описание</label>
+            <input id="gr_desc" type="text" name="description">
+            <br><br>
+            <div style="text-align: left; float: left; width: 100%;  position: relative;">
+                <input type="submit" name="submit" value="Отправить">
+            </div>
+        </div>
+
+    </form>
+    <br>
+    <br>
+    <table class="acf widefat">
+        <thead>
+        <tr>
+            <th class="field_order">Порядок поля</th>
+            <th class="field_label">Название</th>
+            <th class="field_label">Описание</th>
+            <th class="field_name">Создана</th>
+            <th class="field_type">Колличество учасников</th>
+        </tr>
+        </thead>
+        <tbody>
+        {rows}
+        </tbody>
+    </table>
+</div>
