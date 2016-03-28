@@ -5,7 +5,6 @@ global $current_user;
 get_currentuserinfo();
 global $user_gr;
 $user_gr=get_user_gr($current_user->ID);
-$user_gr=$user_gr;
 ?>
 
 <!DOCTYPE html>
