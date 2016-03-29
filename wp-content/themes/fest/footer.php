@@ -330,7 +330,7 @@
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 one">
                                     <div class="input-group">
                                         <span class="input-group-addon">Тематика группы</span>
                                         <select title="Тематики" class="form-control" name="subjects" id="them">
@@ -339,7 +339,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 two">
                                     <div class="input-group">
                                         <span class="input-group-addon">Тематика группы</span>
                                         <input type="text" name="log" class="form-control" placeholder="Общее колличество человек в комманде" title="Общее колличество человек в комманде">
