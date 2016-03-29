@@ -291,8 +291,43 @@ margin-bottom: 10px;
     height: 30px;
 }
 
+.i_group{
+    margin: -3px;
+}
+.i_group-center
+{
+    position: relative;
+    color: #5243FF;
+    z-index: 152;
+}
 
+.i_group-spirit
+{
+    margin: -11px;
+    margin-top: 4px;
+    position: absolute;
+}
+.i_group-spirit_2 {
+    margin-left: -16px;
+    font-size: 19px;
+}
+.i_group-mark
+{
+    margin-left: -14px;
+    margin-top: 3px;
+    position: absolute;
+    color: #5243FF;
+}
 
+.i_group-book
+{
+    margin-left: -13px;
+    color: #FFFFFF;
+    font-size: 10px;
+}
+.big{
+    font-size: 130%;
+}
 
 
 

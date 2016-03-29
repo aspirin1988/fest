@@ -92,7 +92,7 @@ $user_gr=get_user_gr($current_user->ID);
 							 <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="/wp-admin">Профиль</a></li>
-							<li><a href="#">Регистрация команды</a></li>
+							<li><a href="#" class="reg" data-target="#reg-group" data-toggle="modal">Регистрация команды</a></li>
 							<li><a href="#"></a></li>
 							<li><a href="<?php echo wp_logout_url( '/' );?>">Выход</a></li>
 						</ul>

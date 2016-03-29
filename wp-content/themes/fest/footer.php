@@ -3,20 +3,14 @@
 <!-- auth modal -->
 <div id="auth-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-sm normal-font">
-
-
         <div id="auth-carousel" class="carousel slide" data-ride="carousel" data-interval="0">
-
             <div class="carousel-inner">
-
                 <div class="item active">
                     <div class="modal-content">
-
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title">Вход</h4>
                         </div>
-
                         <div class="modal-body">
                             <form action="<?php bloginfo('url'); ?>/wp-login.php?redirect_to=/" method="post" class="login-form">
                                 <div class="input-group">
@@ -198,6 +192,171 @@
 
         </div>
 
+    </div>
+</div>
+<div id="reg-group" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-md normal-font">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+            <form action="" method="post" name="group_add" >
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div style="min-height: 440px;" class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Регистрация компании</h4>
+                        </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="i_group glyphicon glyphicon-user"></i><i class="i_group i_group-center glyphicon glyphicon-user"></i><i class="i_group glyphicon glyphicon-user"></i></span>
+                                            <input type="text" name="log" class="form-control" placeholder="Название команды" title="Название команды">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input type="text" name="log" class="form-control" placeholder="ФИО Руководителя" title="ФИО Руководителя">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="i_group glyphicon glyphicon-user"></i><i class="i_group-spirit glyphicon glyphicon-record"></i></span>
+                                            <input type="text" name="log" class="form-control" placeholder="ФИО Духовника" title="ФИО Духовника">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i><i class="i_group-book glyphicon glyphicon-grain"></i></span>
+                                            <input type="text" name="log" class="form-control" placeholder="Сан Духовника" title="Сан Духовника">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i><i class="i_group-mark glyphicon glyphicon-map-marker"></i></span>
+                                            <input type="text" name="log" class="form-control" placeholder="Область" title="Область">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i><i class="i_group-mark glyphicon glyphicon-map-marker"></i></span>
+                                            <input type="text" name="log" class="form-control" placeholder="Город" title="Город">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                            <input type="text" name="log" class="form-control" placeholder="Адрес"  title="Адрес">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></i><i class="i_group-spirit_2 glyphicon glyphicon-record"></i></span>
+                                            <input type="text" name="log" class="form-control" placeholder="Название прихода" title="Название прихода">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+
+                        <div class="modal-footer">
+                                <a class="btn btn-primary right" href="#myCarousel" data-slide="next">Далее</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="item">
+                    <div style="min-height: 440px;" class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Регистрация компании</h4>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="i_group glyphicon glyphicon-user"></i><i class="i_group i_group glyphicon glyphicon-user"></i><i class="i_group glyphicon glyphicon-user"></i></span>
+                                        <input type="text" name="log" class="form-control" placeholder="Колличество человек в комманде" title="Колличество человек в комманде">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <span class="input-group-addon">Возраст участников</span>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="small glyphicon glyphicon-user"></i></span>
+                                                <input type="text" name="log" class="form-control" placeholder="От" title="Минимальный возраст участника">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="big glyphicon glyphicon-user"></i></span>
+                                                <input type="text" name="log" class="form-control" placeholder="До" title="Максимальный возраст участника">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="i_group glyphicon glyphicon-user"></i><i class="i_group i_group glyphicon glyphicon-user"></i><i class="i_group glyphicon glyphicon-user"></i></span>
+                                        <input type="text" name="log" class="form-control" placeholder="Общее колличество человек в комманде" title="Общее колличество человек в комманде">
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="input-group-addon">Тематика группы</span>
+                                    <div class="input-group">
+                                        <!--<span class="input-group-addon"></span>-->
+                                        <select title="Тип тематики" class="form-control" name="type-them" id="type-them">
+                                            <option value="1">Одобренная тема</option>
+                                            <option value="2">Произвольная тема</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Тематика группы</span>
+                                        <select title="Тематики" class="form-control" name="them" id="them">
+                                            <option value="1" >ssss</option>
+                                            <option value="2" >wefwefwe</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Тематика группы</span>
+                                        <input type="text" name="log" class="form-control" placeholder="Общее колличество человек в комманде" title="Общее колличество человек в комманде">
+                                        <input type="text" name="them_id" class="hide">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="modal-footer">
+                                <a class="btn btn-danger left" href="#myCarousel" data-slide="prev">Назад</a>
+                                <input type="submit" name="add_group" value="Создать" class="btn btn-primary">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
     </div>
 </div>
 <div id="vkapi_body">			<div id="vk_api_transport" style="position: absolute; top: -10000px;"><script type="text/javascript" src="https://vk.com/js/api/openapi.js" async=""></script></div>

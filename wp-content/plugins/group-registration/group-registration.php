@@ -28,6 +28,7 @@ License: GPL2
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 include ('includes/install.php');
 add_action( 'admin_menu','add_menu');
@@ -54,6 +55,7 @@ function reg_param()
 
 function get_main()
 {
+    echo '<div class="fields_header"><div class="header" ><h1>Добавление списка разрешенных групп</h1> </div>';
     global $current_user;
     get_currentuserinfo();
     if (isset($_POST['submit']))
@@ -123,6 +125,7 @@ function get_main()
 
 function get_main1()
 {
+    echo '<div class="fields_header"><div class="header" ><h1>Добавление списка разрешенных групп</h1> </div>';
     global $current_user;
     get_currentuserinfo();
     if (isset($_POST['submit']))

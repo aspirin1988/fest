@@ -6,8 +6,6 @@ get_currentuserinfo();
 //add_group('test','test');
 //reg_group(1,$current_user->ID);
 
-
-
 ?>
     <div id="carousel-top-generic" class="top-block carousel slide top-slider" data-ride="carousel">
         <!-- Indicators -->
@@ -44,7 +42,9 @@ get_currentuserinfo();
 
 
 
-<?php $menu=wp_get_nav_menu_items('Main_menu'); /*print_r($menu);*/
+<?php
+print_r($_POST);
+$menu=wp_get_nav_menu_items('Main_menu'); /*print_r($menu);*/
 
 
 function rem ($menu)
