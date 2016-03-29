@@ -75,11 +75,12 @@ function add_group($user,$name,$creator,$name_boss,$name_confessor,$san_confesso
         $sql = "UPDATE wp_users SET user_reg_gr='$res' WHERE ID=$user->ID";
         $wpdb->query($sql);
         $sql = "UPDATE directory_$subjects_type SET gr_create=1 WHERE id_direct=$subjects";
-        return $wpdb->query($sql);
+        $wpdb->query($sql);
+        return ['data'=>['id'=>$res],'success'=>true];
     }
     else
     {
-        return false;
+        return  ['data'=>[],'success'=>false];
     }
 }
 
@@ -155,6 +156,11 @@ function show_all_directory($id)
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
     $res=$wpdb->get_results('SELECT d.*,(select u.display_name from wp_users u where u.ID=d.creator) as display_name from directory_'.$id.' d');
+//    $res1=[];
+//    foreach($res as $key=>$val)
+//    {
+//        $res1[$key+1]=$val;
+//    }
     return $res;
 }
 

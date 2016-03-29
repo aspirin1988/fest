@@ -27,6 +27,7 @@ $user_gr=get_user_gr($current_user->ID);
 	</script>
 	<script type="text/javascript" src="http://fest-dss.kz/wp-content/plugins/vkontakte-api/js/callback.js?ver=4.4.2"></script>
 	<script type="text/javascript" src="http://fest-dss.kz/wp-content/plugins/vkontakte-api/js/callback.js?ver=4.4.2"></script>
+	<script type="text/javascript" src="<?php bloginfo('template_directory');?>/public/js/main.js"></script>
 	<meta name="robots" content="noindex,follow">
 </head>
 <body class="ort-font">

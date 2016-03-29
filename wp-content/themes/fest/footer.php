@@ -1,4 +1,4 @@
-<?php print_r($_POST) //wp_footer(); ?>
+<?php //wp_footer(); ?>
 
 <!-- auth modal -->
 <div id="auth-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
@@ -197,7 +197,7 @@
 <div id="reg-group" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-md normal-font">
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-            <form action="" method="post" name="group_add" >
+            <form action="<?php bloginfo('url'); ?>/index.php/grouprg" method="post" name="group_add" >
             <div class="carousel-inner">
                 <div class="item active">
                     <div style="min-height: 440px;" class="modal-content">
@@ -210,7 +210,7 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="i_group glyphicon glyphicon-user"></i><i class="i_group i_group-center glyphicon glyphicon-user"></i><i class="i_group glyphicon glyphicon-user"></i></span>
-                                            <input type="text" name="name" class="form-control" placeholder="Название команды" title="Название команды">
+                                            <input type="text" name="name_gr" class="form-control" placeholder="Название команды" title="Название команды">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -321,6 +321,7 @@
                                     <div class="input-group">
                                         <!--<span class="input-group-addon"></span>-->
                                         <select title="Тип тематики" class="form-control" name="subjects_type" id="type-them">
+                                            <option id="del_item" value="">Выбтрите тему</option>
                                             <option value="1">Одобренная тема</option>
                                             <option value="2">Произвольная тема</option>
                                         </select>
