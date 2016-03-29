@@ -1,4 +1,4 @@
-<?php //wp_footer(); ?>
+<?php print_r($_POST) //wp_footer(); ?>
 
 <!-- auth modal -->
 <div id="auth-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
@@ -210,13 +210,13 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="i_group glyphicon glyphicon-user"></i><i class="i_group i_group-center glyphicon glyphicon-user"></i><i class="i_group glyphicon glyphicon-user"></i></span>
-                                            <input type="text" name="log" class="form-control" placeholder="Название команды" title="Название команды">
+                                            <input type="text" name="name" class="form-control" placeholder="Название команды" title="Название команды">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input type="text" name="log" class="form-control" placeholder="ФИО Руководителя" title="ФИО Руководителя">
+                                            <input type="text" name="name_boss" class="form-control" placeholder="ФИО Руководителя" title="ФИО Руководителя">
                                         </div>
                                     </div>
                                 </div>
@@ -225,13 +225,13 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="i_group glyphicon glyphicon-user"></i><i class="i_group-spirit glyphicon glyphicon-record"></i></span>
-                                            <input type="text" name="log" class="form-control" placeholder="ФИО Духовника" title="ФИО Духовника">
+                                            <input type="text" name="name_confessor" class="form-control" placeholder="ФИО Духовника" title="ФИО Духовника">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i><i class="i_group-book glyphicon glyphicon-grain"></i></span>
-                                            <input type="text" name="log" class="form-control" placeholder="Сан Духовника" title="Сан Духовника">
+                                            <input type="text" name="san_confessor" class="form-control" placeholder="Сан Духовника" title="Сан Духовника">
                                         </div>
                                     </div>
                                 </div>
@@ -240,13 +240,13 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-globe"></i><i class="i_group-mark glyphicon glyphicon-map-marker"></i></span>
-                                            <input type="text" name="log" class="form-control" placeholder="Область" title="Область">
+                                            <input type="text" name="region" class="form-control" placeholder="Область" title="Область">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i><i class="i_group-mark glyphicon glyphicon-map-marker"></i></span>
-                                            <input type="text" name="log" class="form-control" placeholder="Город" title="Город">
+                                            <input type="text" name="city" class="form-control" placeholder="Город" title="Город">
                                         </div>
                                     </div>
                                 </div>
@@ -255,13 +255,13 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                            <input type="text" name="log" class="form-control" placeholder="Адрес"  title="Адрес">
+                                            <input type="text" name="address_parish" class="form-control" placeholder="Адрес"  title="Адрес">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></i><i class="i_group-spirit_2 glyphicon glyphicon-record"></i></span>
-                                            <input type="text" name="log" class="form-control" placeholder="Название прихода" title="Название прихода">
+                                            <input type="text" name="name_parish" class="form-control" placeholder="Название прихода" title="Название прихода">
                                         </div>
                                     </div>
                                 </div>
@@ -284,7 +284,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="i_group glyphicon glyphicon-user"></i><i class="i_group i_group glyphicon glyphicon-user"></i><i class="i_group glyphicon glyphicon-user"></i></span>
-                                        <input type="text" name="log" class="form-control" placeholder="Колличество человек в комманде" title="Колличество человек в комманде">
+                                        <input type="text" name="number_of_persons" class="form-control" placeholder="Колличество человек в комманде" title="Колличество человек в комманде">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -293,13 +293,13 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="small glyphicon glyphicon-user"></i></span>
-                                                <input type="text" name="log" class="form-control" placeholder="От" title="Минимальный возраст участника">
+                                                <input type="text" name="age_from" class="form-control" placeholder="От" title="Минимальный возраст участника">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="big glyphicon glyphicon-user"></i></span>
-                                                <input type="text" name="log" class="form-control" placeholder="До" title="Максимальный возраст участника">
+                                                <input type="text" name="age_to" class="form-control" placeholder="До" title="Максимальный возраст участника">
                                             </div>
                                         </div>
                                     </div>
@@ -310,7 +310,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="i_group glyphicon glyphicon-user"></i><i class="i_group i_group glyphicon glyphicon-user"></i><i class="i_group glyphicon glyphicon-user"></i></span>
-                                        <input type="text" name="log" class="form-control" placeholder="Общее колличество человек в комманде" title="Общее колличество человек в комманде">
+                                        <input type="text" name="total_number_of_persons" class="form-control" placeholder="Общее колличество человек в комманде" title="Общее колличество человек в комманде">
                                     </div>
                                 </div>
                             </div>
@@ -320,7 +320,7 @@
                                     <span class="input-group-addon">Тематика группы</span>
                                     <div class="input-group">
                                         <!--<span class="input-group-addon"></span>-->
-                                        <select title="Тип тематики" class="form-control" name="type-them" id="type-them">
+                                        <select title="Тип тематики" class="form-control" name="subjects_type" id="type-them">
                                             <option value="1">Одобренная тема</option>
                                             <option value="2">Произвольная тема</option>
                                         </select>
@@ -332,7 +332,7 @@
                                 <div class="col-md-12">
                                     <div class="input-group">
                                         <span class="input-group-addon">Тематика группы</span>
-                                        <select title="Тематики" class="form-control" name="them" id="them">
+                                        <select title="Тематики" class="form-control" name="subjects" id="them">
                                             <option value="1" >ssss</option>
                                             <option value="2" >wefwefwe</option>
                                         </select>
