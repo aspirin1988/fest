@@ -1,4 +1,65 @@
 <div class="fields_header">
+    <style>
+        .edit {
+            background-image: url("/wp-content/plugins/group-registration/images/_edit.png");
+            background-size: 100% 100% ;
+            outline: none; /*убираем стандартную обводку браузера*/
+            -moz-border-radius: 5px; /*закругляем углы для Mozilla*/
+            -webkit-border-radius: 5px; /*закругляем углы для Chrome, Safari*/
+            border-radius: 5px; /*закругляем углы для остальных браузеров*/
+            padding-left: 20px; /*отступ слева от ввода, чтобы текст не был на картинке(выбирать по размеру картинки)*/
+            margin: 5px;
+            text-indent: -999px;
+        }
+        .del {
+            background-image: url("/wp-content/plugins/group-registration/images/_del.png");
+            background-size: 100% 100% ;
+            outline: none; /*убираем стандартную обводку браузера*/
+            -webkit-border-radius:5px;
+            -moz-border-radius:5px;
+            border-radius:5px;
+            padding-left: 20px; /*отступ слева от ввода, чтобы текст не был на картинке(выбирать по размеру картинки)*/
+            margin: 5px;
+            text-indent: -999px;
+        }
+        .mes_error
+        {
+            display: inline-block;
+            font-size: 10px;
+            background: #5C5C5C;
+            -webkit-border-radius:10px;
+            -moz-border-radius:10px;
+            border: 3px solid;
+            border-radius:10px;
+            margin: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .mes_error h3{
+            color: #ff0000;
+        }
+        .mes_success
+        {
+            display: inline-block;
+            font-size: 10px;
+            background: #5C5C5C;
+            -webkit-border-radius:10px;
+            -moz-border-radius:10px;
+            border-radius:10px;
+            border: 3px solid;
+            margin: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .mes_success h3{
+            color: #00ff00;
+        }
+        .hide{
+            display: none;
+        }
+
+    </style>
+
     <form method="post" name="add_gr" action="" >
         <div style="width: 50%">
             <label for="gr_name">Название</label>
@@ -7,25 +68,41 @@
             <input id="gr_desc" type="text" name="description">
             <br><br>
             <div style="text-align: left; float: left; width: 100%;  position: relative;">
-                <input type="submit" name="submit" value="Отправить">
+                <input type="submit"  name="submit" value="Отправить">
             </div>
         </div>
-
+    
     </form>
     <br>
     <br>
-    <table class="acf widefat">
-        <thead>
-        <tr>
-            <th class="field_order">Порядок поля</th>
-            <th class="field_label">Название</th>
-            <th class="field_label">Описание</th>
-            <th class="field_name">Создана</th>
-            <th class="field_type">Колличество учасников</th>
-        </tr>
-        </thead>
-        <tbody>
-        {rows}
-        </tbody>
-    </table>
+        <table class="acf widefat">
+            <thead>
+            <tr>
+                <!--id_direct,name,description,creator,gr_create-->
+                <th class="field_order">Порядок поля</th>
+                <th class="field_label">Название</th>
+                <th class="field_label">Описание</th>
+                <th class="field_name">Создана</th>
+                <th class="field_type">Создатель</th>
+                <th class="field_type">Редактирование</th>
+            </tr>
+            </thead>
+            <tbody>
+            {rows}
+            </tbody>
+        </table>
 </div>
+<script type="application/javascript">
+    setTimeout(function (){setInterval(hide_mess(),5000)},2000);
+    function hide_mess()
+    {   var mess;
+        if ( mess= document.getElementsByClassName('mes_success')[0]) {
+            mess.classList.add('hide');
+        }
+
+        if ( mess= document.getElementsByClassName('mes_error')[0]) {
+            mess.classList.add('hide');
+        }
+
+    }
+</script>

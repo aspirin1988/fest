@@ -41,7 +41,6 @@ function create_table() {
             description varchar(128),
             creator INT UNSIGNED,
             gr_create TINYINT UNSIGNED NOT NULL DEFAULT '0',
-            data_create DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
             PRIMARY KEY  pk_gr_id_group (id_direct)
             )$charset_collate;";
         $wpdb->query($sql);
@@ -52,7 +51,6 @@ function create_table() {
             description varchar(128),
             creator INT UNSIGNED,
             gr_create TINYINT UNSIGNED NOT NULL DEFAULT '0',
-            data_create DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
             PRIMARY KEY  pk_gr_id_group (id_direct)
             )$charset_collate;";
         $wpdb->query($sql);
@@ -68,18 +66,59 @@ function add_group($user,$name,$creator,$name_boss,$name_confessor,$san_confesso
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
     $gr=$wpdb->query("SELECT name from group_registration WHERE name='$name'");
+    $su=$wpdb->query("SELECT name from  directory_$subjects_type WHERE id_direct=$subjects AND gr_create=0");
     $r=$gr;
-    if (!$gr) {
+    if (!$gr&&!$su) {
         $sql = "Insert into group_registration (name,creator,name_boss,name_confessor,san_confessor,region,city,address_parish,name_parish,number_of_persons,age_from,age_to,total_number_of_persons,subjects,subjects_type) values ('$name','$creator','$name_boss','$name_confessor','$san_confessor','$region','$city','$address_parish','$name_parish','$number_of_persons','$age_from','$age_to','$total_number_of_persons','$subjects','$subjects_type')";
         $wpdb->get_results($sql);
         $res = mysqli_insert_id($wpdb->dbh);
-        $sql = "UPDATE wp_users SET user_reg_gr='$res' WHERE ID=$user->user_ID";
+        $sql = "UPDATE wp_users SET user_reg_gr='$res' WHERE ID=$user->ID";
+        $wpdb->query($sql);
+        $sql = "UPDATE directory_$subjects_type SET gr_create=1 WHERE id_direct=$subjects";
         return $wpdb->query($sql);
     }
     else
     {
         return false;
     }
+}
+
+function del_group($id)
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $su=$wpdb->query("DELETE from  group_registration WHERE id_group=$id");
+    return $su;
+}
+
+function add_direct($id,$name,$description,$creator)
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $su=$wpdb->query("SELECT name from  directory_$id WHERE name='$name'");
+    if (!$su) {
+        $sql = "Insert into directory_$id (name,description,creator) values ('$name','$description','$creator->ID')";
+        return $wpdb->query($sql);
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function del_direct($id_dir,$id)
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $su=$wpdb->query("DELETE from  directory_$id_dir WHERE id_direct=$id");
+    return $su;
+}
+function edit_direct($id_dir,$id,$name,$description)
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $su=$wpdb->query("UPDATE directory_$id_dir set name='$name',description='$description' WHERE id_direct=$id");
+    return $su;
 }
 
 function reg_group($id,$user)
@@ -101,14 +140,25 @@ function reg_group($id,$user)
     }
 }
 
+
+
 function show_all_gr()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
     $res=$wpdb->get_results('SELECT g.*,(SELECT count(*) FROM wp_users u where u.user_reg_gr=g.id_group)as "count" from group_registration g');
-
     return $res;
 }
+
+function show_all_directory($id)
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $res=$wpdb->get_results('SELECT d.*,(select u.display_name from wp_users u where u.ID=d.creator) as display_name from directory_'.$id.' d');
+    return $res;
+}
+
+
 
 function get_user_gr($id)
 {
