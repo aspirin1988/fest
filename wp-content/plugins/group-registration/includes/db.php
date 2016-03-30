@@ -179,12 +179,12 @@ function show_all_directory($id)
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
     $res=$wpdb->get_results('SELECT d.*,(select u.display_name from wp_users u where u.ID=d.creator) as display_name from directory_'.$id.' d');
-//    $res1=[];
-//    foreach($res as $key=>$val)
-//    {
-//        $res1[$key+1]=$val;
-//    }
-    return $res;
+    $res1=[];
+    foreach($res as $key=>$val)
+    {
+        $res1[$val->id_direct]=$val;
+    }
+    return $res1;
 }
 
 

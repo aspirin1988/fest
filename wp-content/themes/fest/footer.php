@@ -342,8 +342,13 @@
                                 <div class="col-md-12 two " style="display: none;" >
                                     <div class="input-group">
                                         <span class="input-group-addon">Тематика группы</span>
-                                        <input type="text"  name="subjects_name_2" class="form-control" placeholder="Общее колличество человек в комманде" title="Общее колличество человек в комманде">
-                                        <input type="text" name="subjects_2" class="hide">
+                                        <input type="text" id="subjects_name"  name="subjects_name_2" class="form-control" placeholder="Общее колличество человек в комманде" title="Общее колличество человек в комманде">
+                                        <div class="input-group event">
+                                        <ul style=" list-style: none; display: none;" id="find-list">
+                                            <li>wdwd</li>
+                                        </ul>
+                                        </div>
+                                        <input type="text" name="subjects_2" id="subjects_2" class="hide">
                                     </div>
                                 </div>
                             </div>

@@ -91,7 +91,7 @@ $new_menu=	rem($menu,$item);
         <p><?php the_field('Label-fest');?></p>
         <p>
             <a class="btn btn-primary btn-lg " href="/index.php/2016/03/24/polojenie/" role="button">Положение</a>
-            <a class="btn btn-success btn-lg " href  ="#" role="button">Регистрация команды</a>
+            <a class="btn btn-success btn-lg " data-target="#reg-group" data-toggle="modal">Регистрация команды</a>
         </p>
     </div>
     <div style="margin-bottom: 20px;" class="ort-font">

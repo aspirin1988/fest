@@ -14,7 +14,7 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 ?>
 	<div class="col-md-3 left-menu">
 		<div class="align-right">
-			<a class="btn btn-success btn-lg">регистрация команды</a>
+			<a class="btn btn-success btn-lg" data-target="#reg-group" data-toggle="modal">регистрация команды</a>
 		</div>
 		<div class="panel-group" id="accordion">
 		<?php

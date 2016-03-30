@@ -2,6 +2,7 @@
  * Created by serg on 30.03.16.
  */
 var group;
+var them_all;
 $(document).ready(function (){
 
     $('#type-them').click(function(){
@@ -13,6 +14,8 @@ $(document).ready(function (){
             type: "POST",
             data: data
         }).done(function(data1) {
+            them_all=data1;
+            console.log(them_all);
             $("#del_item").remove();
 
             if (select==2)
@@ -31,6 +34,43 @@ $(document).ready(function (){
                 $('#them').append( $( "<option value='"+val['id_direct']+"' >"+val['name']+"</option>" ) );
             })
         });
+    });
+
+    $('#subjects_name').keyup(function(){
+        isset=0;
+        var enter=$(this).val();
+        var isset;
+        var obj=$('#find-list');
+        obj.empty();
+        if (enter.length) {
+            enter = enter.toLowerCase();
+            console.info(them_all);
+            var count =3;
+            $.each(them_all, function (key, val) {
+
+                val['name'] = val['name'].toLowerCase();
+                //val['name'] = val['name'].toLowerCase();
+                var isset_1 = val['name'].indexOf(enter) + 1;
+                console.log(isset_1);
+                if (isset_1) {
+                    if(count){
+                    obj.append($('<li class="form-control" data-name="' + val['name'] + '" data-id="' + val['id_direct'] + '">' + val['name'] + '</li>'));
+                    isset = isset_1;
+                }
+                    count--;
+            }
+            });
+
+            if (isset) {
+                $('#find-list li').click(function(){
+                    console.info($(this).data('id'));
+                    $('#subjects_name').val($(this).data('name'));
+                    $('#subjects_2').val($(this).data('id'));
+                    $('#find-list').hide();
+                });
+                obj.show();
+            }
+        }
     });
 
     $('#add_group').click(function(){
@@ -111,6 +151,7 @@ $(document).ready(function (){
         });
 
     });
+
 
     //$('#group-id').click(function(){
     //    $('#group-description').text(group[$('#group-id').val()]['name']);

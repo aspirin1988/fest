@@ -329,6 +329,17 @@ margin-bottom: 10px;
     font-size: 130%;
 }
 
+.event {
+    width: 82%;
+    position: absolute;
+    left: 96px;
+    top: 34px;
+}
+
+.event li:hover {
+    background: cadetblue;
+}
+
 
 
 
