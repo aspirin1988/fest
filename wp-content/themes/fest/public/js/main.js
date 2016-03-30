@@ -1,7 +1,7 @@
 /**
  * Created by serg on 30.03.16.
  */
-
+var group;
 $(document).ready(function (){
 
     $('#type-them').click(function(){
@@ -52,18 +52,68 @@ $(document).ready(function (){
         }).done(function(data1) {
             if (!data1['success'])
             {
-                $('#mess').text(data1['data']['mess']);
+                $('#mess').text(data1['data']['mess']).show();
+                setTimeout(function(){ $('#mess').hide();},1000);
             }
             else
             {
                 $.each(input, function(key,val){
                     $(val).val('');
                 } );
-                $('#reg-group').modal('hide');
+                setTimeout(function(){$('#reg-group').modal('hide');  $('#myCarousel').carousel(0);  $('#mess').hide();},1000);
             }
         });
 
         //console.log(select);
     });
+
+    $('#gr').click(function(){
+        var data ={};
+        var select=$(this).val();
+        data['show_gr']=select;
+        $.ajax({
+            url: "/index.php/grouprg",
+            type: "POST",
+            data: data
+        }).done(function(data1) {
+            group=data1;
+            if(Object.keys(data1).length) {
+                $('#group-id').empty();
+                $.each(data1, function (key, val) {
+                    $('#group-id').append($("<option value='" + val['id_group'] + "' >" + val['name'] + "</option>"));
+                })
+            }
+            else
+            {
+                $('#group-id').empty().append($("<option>Груп нет</option>"));
+            }
+        });
+    });
+
+    $('#selected-group').click(function(){
+        var data = {};
+        data['user_reg_gr']=$('#group-id').val();
+        data['reg_in_group']=1;$.ajax({
+            url: "/index.php/grouprg",
+            type: "POST",
+            data: data
+        }).done(function(data1) {
+            if(data1['success'])
+            {
+                $('#mess_gr').text(data1['data']['mess']).show();
+                setTimeout(function(){$('#select-group').modal('hide');   $('#myCarousel').carousel(0);  $('#mess').hide(); location.reload();},1000);
+            }
+            else
+            {
+                $('#mess_gr').text(data1['data']['mess']).show();
+                setTimeout(function(){ $('#mess').hide();},1000);
+            }
+        });
+
+    });
+
+    //$('#group-id').click(function(){
+    //    $('#group-description').text(group[$('#group-id').val()]['name']);
+    //});
 
 });

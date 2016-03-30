@@ -119,6 +119,7 @@ function del_direct($id_dir,$id)
     $su=$wpdb->query("DELETE from  directory_$id_dir WHERE id_direct=$id");
     return $su;
 }
+
 function edit_direct($id_dir,$id,$name,$description)
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -146,6 +147,18 @@ function reg_group($id,$user)
     }
 }
 
+function select_gr($user,$user_reg_gr){
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    if($wpdb->query("UPDATE wp_users SET user_reg_gr='$user_reg_gr' WHERE ID=$user->ID"))
+    {
+        return ['data'=>['mess'=>'Вы сменили группу!'],'success'=>true];
+    }
+    else
+    {
+        return ['data'=>['mess'=>'Не удалось сменить группу!'],'success'=>false];
+    }
+}
 
 
 function show_all_gr()
@@ -153,7 +166,12 @@ function show_all_gr()
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
     $res=$wpdb->get_results('SELECT g.*,(SELECT count(*) FROM wp_users u where u.user_reg_gr=g.id_group)as "count" from group_registration g');
-    return $res;
+    $ret=[];
+    foreach($res as $key=>$val)
+    {
+        $ret[$val->id_group]=$val;
+    }
+    return $ret;
 }
 
 function show_all_directory($id)

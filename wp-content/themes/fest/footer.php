@@ -203,7 +203,7 @@
                     <div style="min-height: 440px;" class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Регистрация компании</h4>
+                            <h4 class="modal-title">Регистрация команды</h4>
                         </div>
                             <div class="modal-body">
                                 <div class="row">
@@ -278,7 +278,7 @@
                     <div style="min-height: 440px;" class="modal-content">
                         <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Регистрация компании</h4>
+                        <h4 class="modal-title">Регистрация команды</h4>
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-6">
@@ -330,7 +330,7 @@
                             </div>
                             <br>
                             <div class="row">
-                                <div class="col-md-12 one">
+                                <div class="col-md-12 one" style="display: none;" >
                                     <div class="input-group">
                                         <span class="input-group-addon">Тематика группы</span>
                                         <select title="Тематики" class="form-control" name="subjects_1" id="them">
@@ -339,10 +339,10 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-12 two">
+                                <div class="col-md-12 two " style="display: none;" >
                                     <div class="input-group">
                                         <span class="input-group-addon">Тематика группы</span>
-                                        <input type="text" name="subjects_name_2" class="form-control" placeholder="Общее колличество человек в комманде" title="Общее колличество человек в комманде">
+                                        <input type="text"  name="subjects_name_2" class="form-control" placeholder="Общее колличество человек в комманде" title="Общее колличество человек в комманде">
                                         <input type="text" name="subjects_2" class="hide">
                                     </div>
                                 </div>
@@ -362,6 +362,45 @@
         </div>
     </div>
 </div>
+
+<div id="select-group" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-sm normal-font">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+            <form action="<?php bloginfo('url'); ?>/index.php/grouprg" method="post" id="group_add" name="group_add" >
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div  class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Выбор группы</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="i_group glyphicon glyphicon-user"></i><i class="i_group i_group-center glyphicon glyphicon-user"></i><i class="i_group glyphicon glyphicon-user"></i></span>
+                                            <select type="text" name="name_gr" class="form-control" id="group-id" title="Название команды">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                            <div style="font-size: 20px;" class="label label-warning" id="mess_gr" ></div>
+                            <div class="modal-footer">
+                                <a id="selected-group" class="btn btn-primary right">Выбрать</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
 <div id="vkapi_body">			<div id="vk_api_transport" style="position: absolute; top: -10000px;"><script type="text/javascript" src="https://vk.com/js/api/openapi.js" async=""></script></div>
     <script type="text/javascript">
         jQuery(function () {

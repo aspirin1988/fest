@@ -47,6 +47,14 @@ if (isset($_POST['reg_in_group']))
 {
     global $current_user;
     get_currentuserinfo();
-    $res=add_group($current_user,$_POST['id_gr']);
+    $res=select_gr($current_user,$_POST['user_reg_gr']);
+    echo json_encode($res);
+}
+if (isset($_POST['show_gr']))
+{
+    global $current_user;
+    get_currentuserinfo();
+    $res=show_all_gr();
+    //print_r($res);
     echo json_encode($res);
 }
