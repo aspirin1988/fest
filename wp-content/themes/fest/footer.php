@@ -197,7 +197,7 @@
 <div id="reg-group" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-md normal-font">
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-            <form action="<?php bloginfo('url'); ?>/index.php/grouprg" method="post" name="group_add" >
+            <form action="<?php bloginfo('url'); ?>/index.php/grouprg" method="post" id="group_add" name="group_add" >
             <div class="carousel-inner">
                 <div class="item active">
                     <div style="min-height: 440px;" class="modal-content">
@@ -321,7 +321,7 @@
                                     <div class="input-group">
                                         <!--<span class="input-group-addon"></span>-->
                                         <select title="Тип тематики" class="form-control" name="subjects_type" id="type-them">
-                                            <option id="del_item" value="">Выбтрите тему</option>
+                                            <option id="del_item" value="1">Выбтрите тему</option>
                                             <option value="1">Одобренная тема</option>
                                             <option value="2">Произвольная тема</option>
                                         </select>
@@ -333,7 +333,7 @@
                                 <div class="col-md-12 one">
                                     <div class="input-group">
                                         <span class="input-group-addon">Тематика группы</span>
-                                        <select title="Тематики" class="form-control" name="subjects" id="them">
+                                        <select title="Тематики" class="form-control" name="subjects_1" id="them">
                                             <option value="1" >ssss</option>
                                             <option value="2" >wefwefwe</option>
                                         </select>
@@ -342,21 +342,23 @@
                                 <div class="col-md-12 two">
                                     <div class="input-group">
                                         <span class="input-group-addon">Тематика группы</span>
-                                        <input type="text" name="log" class="form-control" placeholder="Общее колличество человек в комманде" title="Общее колличество человек в комманде">
-                                        <input type="text" name="them_id" class="hide">
+                                        <input type="text" name="subjects_name_2" class="form-control" placeholder="Общее колличество человек в комманде" title="Общее колличество человек в комманде">
+                                        <input type="text" name="subjects_2" class="hide">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                            <div style="font-size: 20px;" class="label label-warning" id="mess" ></div>
+                        </div>
                         <div class="modal-footer">
                                 <a class="btn btn-danger left" href="#myCarousel" data-slide="prev">Назад</a>
-                                <input type="submit" name="add_group" value="Создать" class="btn btn-primary">
+                                <div type="submit" name="add_group" id="add_group" value="Создать" class="btn btn-primary">Создать</div>
                         </div>
                     </div>
                 </div>
             </div>
             </form>
+
         </div>
     </div>
 </div>

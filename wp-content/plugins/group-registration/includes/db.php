@@ -66,7 +66,7 @@ function add_group($user,$name,$creator,$name_boss,$name_confessor,$san_confesso
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
     $gr=$wpdb->query("SELECT name from group_registration WHERE name='$name'");
-    $su=$wpdb->query("SELECT name from  directory_$subjects_type WHERE id_direct=$subjects AND gr_create=0");
+    $su=$wpdb->query("SELECT name from  directory_$subjects_type WHERE id_direct=$subjects AND gr_create=1");
     $r=$gr;
     if (!$gr&&!$su) {
         $sql = "Insert into group_registration (name,creator,name_boss,name_confessor,san_confessor,region,city,address_parish,name_parish,number_of_persons,age_from,age_to,total_number_of_persons,subjects,subjects_type) values ('$name','$creator','$name_boss','$name_confessor','$san_confessor','$region','$city','$address_parish','$name_parish','$number_of_persons','$age_from','$age_to','$total_number_of_persons','$subjects','$subjects_type')";
@@ -80,7 +80,12 @@ function add_group($user,$name,$creator,$name_boss,$name_confessor,$san_confesso
     }
     else
     {
-        return  ['data'=>[],'success'=>false];
+        if ($gr) {
+            return ['data' => ['mess'=>'Данная группа уже существует!'], 'success' => false];
+        }
+        if ($su) {
+            return ['data' => ['mess'=>'Данная тема уже занята!'], 'success' => false];
+        }
     }
 }
 

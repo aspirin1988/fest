@@ -28,9 +28,42 @@ $(document).ready(function (){
 
             $('#them').empty();
             $.each(data1,function(key,val){
-                $('#them').append( $( "<option value='"+val['id']+"' >"+val['name']+"</option>" ) );
+                $('#them').append( $( "<option value='"+val['id_direct']+"' >"+val['name']+"</option>" ) );
             })
         });
+    });
+
+    $('#add_group').click(function(){
+        var data={};
+        var form=$('#group_add');
+        var input=form.find('input');
+        var select=form.find('select');
+        $.each(input, function(key,val){
+            data[$(val).attr("name")]=$(val).val();
+        } );
+        $.each(select, function(key,val){
+            data[$(val).attr("name")]=$(val).val();
+        } );
+        data['add_group']=1;
+        $.ajax({
+            url: "/index.php/grouprg",
+            type: "POST",
+            data: data
+        }).done(function(data1) {
+            if (!data1['success'])
+            {
+                $('#mess').text(data1['data']['mess']);
+            }
+            else
+            {
+                $.each(input, function(key,val){
+                    $(val).val('');
+                } );
+                $('#reg-group').modal('hide');
+            }
+        });
+
+        //console.log(select);
     });
 
 });

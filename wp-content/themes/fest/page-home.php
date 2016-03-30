@@ -43,7 +43,6 @@ get_currentuserinfo();
 
 
 <?php
-print_r($_POST);
 $menu=wp_get_nav_menu_items('Main_menu'); /*print_r($menu);*/
 
 
