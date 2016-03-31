@@ -174,11 +174,11 @@ function show_all_gr()
     return $ret;
 }
 
-function show_all_directory($id)
+function show_all_directory($id,$enter)
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
-    $res=$wpdb->get_results('SELECT d.*,(select u.display_name from wp_users u where u.ID=d.creator) as display_name from directory_'.$id.' d');
+    $res=$wpdb->get_results('SELECT d.*,(select u.display_name from wp_users u where u.ID=d.creator) as display_name from directory_'.$id.' d WHERE name like \'%'.$enter.'%\'');
     $res1=[];
     foreach($res as $key=>$val)
     {

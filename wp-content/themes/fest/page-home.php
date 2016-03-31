@@ -91,7 +91,9 @@ $new_menu=	rem($menu,$item);
         <p><?php the_field('Label-fest');?></p>
         <p>
             <a class="btn btn-primary btn-lg " href="/index.php/2016/03/24/polojenie/" role="button">Положение</a>
+            <?php if ($current_user->data->ID) {?>
             <a class="btn btn-success btn-lg " data-target="#reg-group" data-toggle="modal">Регистрация команды</a>
+            <?php }?>
         </p>
     </div>
     <div style="margin-bottom: 20px;" class="ort-font">

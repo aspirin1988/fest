@@ -40,7 +40,7 @@ $ins=[
 
 if (isset($_POST['subjects_type'])&& !isset($_POST['add_group']))
 {
-    echo json_encode(show_all_directory((int)$_POST['subjects_type']));
+    echo json_encode(show_all_directory((int)$_POST['subjects_type'],$_POST['enter']));
 }
 
 if (isset($_POST['reg_in_group']))

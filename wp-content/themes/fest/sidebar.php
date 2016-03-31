@@ -8,13 +8,18 @@
  * @package fest
  */
 
+global $current_user;
+get_currentuserinfo();
+
 if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 	return;
 }
 ?>
 	<div class="col-md-3 left-menu">
 		<div class="align-right">
+			<?php if ($current_user->data->ID) {?>
 			<a class="btn btn-success btn-lg" data-target="#reg-group" data-toggle="modal">регистрация команды</a>
+			<?php } ?>
 		</div>
 		<div class="panel-group" id="accordion">
 		<?php
