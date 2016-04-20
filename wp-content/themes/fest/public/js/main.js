@@ -62,7 +62,7 @@ $(document).ready(function (){
 
             console.info(them_all);
             var count =1;
-            $.each(them_all, function (key, val) {
+            $.each(data1, function (key, val) {
                 val['name'] = val['name'].toLowerCase();
                 //val['name'] = val['name'].toLowerCase();
                 var isset_1 = val['name'].indexOf(enter) + 1;
