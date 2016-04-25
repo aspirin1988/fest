@@ -56,7 +56,13 @@ function reg_param()
 
 function get_all_group()
 {
-    echo '<div class="fields_header"><div class="header" ><h1>Список разрешенных групп</h1> </div>';
+    if (!isset($_POST['show_data'])) {
+        echo '<div class="fields_header"><div class="header" ><h1>Список разрешенных групп</h1> </div>';
+    }
+    else
+    {
+        echo '<div class="fields_header"><div class="header" ><h1>Данные группы</h1> </div>';
+    }
     $edit=false;
     if(isset($_POST['approve']))
     {
@@ -92,7 +98,12 @@ function get_all_group()
             $sel='';
         }
 
-        $tr.='<form name="edit" method="post" action=""><tr><td>'.$value->id_group.'</td><td><input type="text" name="name" value="'.$value->name_boss.'"></td><td><textarea type="" name="description">'.$value->description.'</textarea></td><td>'.$user->data->display_name.'</td><td><input type="checkbox" '.$sel.'"></td><td><input type="submit" class="del" name="refusal" value="'.$value->id_group.'"><input type="submit" class="edit" name="approve" value="'.$value->id_group.'"><input type="submit" class="edit" name="show_data" value="'.$value->id_group.'"></td></tr></form>';
+        $tr.='<form name="edit" method="post" action=""><tr><td>'.$value->id_group.'</td><td><input type="text" name="name" value="'.$value->name_boss.'"></td><td><textarea type="" name="description">'.$value->description.'</textarea></td><td>'.$user->data->display_name.'</td><td><input type="checkbox" '.$sel.'"></td><td><input type="submit" class="del" name="refusal" value="'.$value->id_group.'"><input type="submit" class="edit" name="approve" value="'.$value->id_group.'"><input type="submit" class="show" name="show_data" value="'.$value->id_group.'"></td></tr></form>';
+        if(isset($_POST['show_data'])&&$_POST['show_data']==$value->id_group)
+        {
+            print_r($value);
+            exit();
+        }
     }
     $template = file_get_contents(REG_GR_PLUGIN_DIR.'/admin_gr.html');
     $template=str_replace('{rows}',$tr,$template);
