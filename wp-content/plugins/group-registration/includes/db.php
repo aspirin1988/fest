@@ -171,7 +171,6 @@ function select_gr($user,$user_reg_gr){
     }
 }
 
-
 function show_all_gr()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -190,7 +189,7 @@ function show_all_directory($id,$enter)
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
     $limit='';
-    if ($id==2){$limit=' limit  3';}
+    if ($id==2){$limit=' limit  6';}
     $res=$wpdb->get_results('SELECT d.*,(select u.display_name from wp_users u where u.ID=d.creator) as display_name from directory_'.$id.' d WHERE name like \'%'.$enter.'%\' '.$limit);
     $res1=[];
     foreach($res as $key=>$val)
@@ -199,8 +198,6 @@ function show_all_directory($id,$enter)
     }
     return $res1;
 }
-
-
 
 function get_user_gr($id)
 {

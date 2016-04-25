@@ -3,6 +3,12 @@
 header('Content-Type: application/json');
 //echo json_encode($_POST);
 //Добавление новой группы
+if (isset($_POST['add_direct'])) {
+    global $current_user;
+    get_currentuserinfo();
+    echo json_encode(add_direct(1, (string)$_POST['name'], (string)$_POST['description'], $current_user));
+    }
+
 if (isset($_POST['add_group']))
 {
     $subjects='';
