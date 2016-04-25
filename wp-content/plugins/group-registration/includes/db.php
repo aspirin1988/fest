@@ -139,6 +139,14 @@ function edit_direct($id_dir,$id,$name,$description)
     return $su;
 }
 
+function appruve_gr($value,$id)
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $su=$wpdb->query("UPDATE group_registration set approved='$value' WHERE id_group=$id");
+    return $su;
+}
+
 function reg_group($id,$user)
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -176,6 +184,19 @@ function show_all_gr()
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
     $res=$wpdb->get_results('SELECT g.*,(SELECT count(*) FROM wp_users u where u.user_reg_gr=g.id_group)as "count" from group_registration g');
+    $ret=[];
+    foreach($res as $key=>$val)
+    {
+        $ret[$val->id_group]=$val;
+    }
+    return $ret;
+}
+
+function show_all_gr_apr()
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $res=$wpdb->get_results('SELECT g.*,(SELECT count(*) FROM wp_users u where u.user_reg_gr=g.id_group)as "count" from group_registration g where g.approved=1');
     $ret=[];
     foreach($res as $key=>$val)
     {

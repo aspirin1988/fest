@@ -71,7 +71,7 @@ if (isset($_POST['show_gr']))
 {
     global $current_user;
     get_currentuserinfo();
-    $res=show_all_gr();
+    $res=show_all_gr_apr();
     //print_r($res);
     echo json_encode($res);
 }

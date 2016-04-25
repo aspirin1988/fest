@@ -40,6 +40,7 @@ function add_menu()  {
     //add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function )
     add_submenu_page( REG_GR_PLUGIN_FOLDER , 'Add_group', 'Add group', 1, REG_GR_PLUGIN_FOLDER,'get_main');
     add_submenu_page( REG_GR_PLUGIN_FOLDER , 'Add_advanced_group', 'Add advanced group', 2, 'index','get_main1');
+    add_submenu_page( REG_GR_PLUGIN_FOLDER , 'Add_advanced_group', 'Add advanced group', 3, 'index1','get_all_group');
 }
 function reg_param()
 {
@@ -51,6 +52,52 @@ function reg_param()
     if( ! defined( 'REG_GR_PLUGIN_FOLDER' ) ){ define('REG_GR_PLUGIN_FOLDER', basename(dirname(__FILE__) )); }
     // Plugin Root File QPath
     if ( ! defined( 'REG_GR_PLUGIN_FILE' ) ){ define( 'REG_GR_PLUGIN_FILE', __FILE__ ); }
+}
+
+function get_all_group()
+{
+    echo '<div class="fields_header"><div class="header" ><h1>Список разрешенных групп</h1> </div>';
+    $edit=false;
+    if(isset($_POST['approve']))
+    {
+        $edit=appruve_gr(1, $_POST['approve']);
+    }
+
+    if(isset($_POST['refusal']))
+    {
+        $edit=appruve_gr(0, $_POST['refusal']);
+    }
+
+    if (isset($_POST['approve'])||isset($_POST['refusal'])) {
+        if ($edit) {
+            echo '<div class="mes_success"><h3>Запись былы успешно отредактирована!</h3></div>';
+        } else {
+            echo '<div class="mes_error"><h3>Входе операции редактирования произошла ошибка!</h3></div>';
+        }
+    }
+
+
+    $tr='';
+//    print_r(show_all_gr());
+    $user=get_user_by('id',1);
+    foreach(show_all_gr() as $value){
+
+        $sel = 'checked';
+        if ($value->approved)
+        {
+            $sel=  'checked="checked"';
+        }
+        else
+        {
+            $sel='';
+        }
+
+        $tr.='<form name="edit" method="post" action=""><tr><td>'.$value->id_group.'</td><td><input type="text" name="name" value="'.$value->name_boss.'"></td><td><textarea type="" name="description">'.$value->description.'</textarea></td><td>'.$user->data->display_name.'</td><td><input type="checkbox" '.$sel.'"></td><td><input type="submit" class="del" name="refusal" value="'.$value->id_group.'"><input type="submit" class="edit" name="approve" value="'.$value->id_group.'"><input type="submit" class="edit" name="show_data" value="'.$value->id_group.'"></td></tr></form>';
+    }
+    $template = file_get_contents(REG_GR_PLUGIN_DIR.'/admin_gr.html');
+    $template=str_replace('{rows}',$tr,$template);
+
+    echo  $template;
 }
 
 function get_main()
@@ -192,3 +239,5 @@ function get_main1()
     $template=str_replace('{rows}',$tr,$template);
     echo  $template;
 }
+
+
