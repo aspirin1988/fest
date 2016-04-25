@@ -6,7 +6,7 @@ header('Content-Type: application/json');
 if (isset($_POST['add_direct'])) {
     global $current_user;
     get_currentuserinfo();
-    echo json_encode(add_direct(1, (string)$_POST['name'], (string)$_POST['description'], $current_user));
+    echo json_encode(add_direct(2, (string)$_POST['name'], (string)$_POST['description'], $current_user,$_POST['href']));
     }
 
 if (isset($_POST['add_group']))

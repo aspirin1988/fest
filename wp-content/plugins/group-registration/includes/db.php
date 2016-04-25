@@ -108,13 +108,13 @@ function del_group($id)
     return $su;
 }
 
-function add_direct($id,$name,$description,$creator)
+function add_direct($id,$name,$description,$creator,$href)
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     global $wpdb;
     $su=$wpdb->query("SELECT name from  directory_$id WHERE name='$name'");
     if (!$su) {
-        $sql = "Insert into directory_$id (name,description,creator) values ('$name','$description','$creator->ID')";
+        $sql = "Insert into directory_$id (name,description,creator,href) values ('$name','$description','$creator->ID','$href')";
         return $wpdb->query($sql);
     }
     else
