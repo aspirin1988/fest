@@ -56,34 +56,10 @@ function reg_param()
 
 function get_all_group()
 {
-
+    $download=false;
     if (isset($_POST['download']))
     {
-        header("Content-Type: application/force-download");
-        header('Content-Type: application/octet-stream');
-        header('Content-Type: application/download');
-        header('Content-Disposition: attachment;filename=list.xls');
-        header('Content-Transfer-Encoding: binary');
-
-        xlsBOF(); //начинаем собирать файл
-        /*первая строка*/
-        xlsWriteLabel(1,0,'Название');
-        /*вторая строка*/
-        xlsWriteLabel(2,0,'№п/п');
-        xlsWriteLabel(2,1,'Имя');
-        xlsWriteLabel(2,2,'Фамилия');
-        /*третья строка*/
-        xlsWriteNumber(3,0,'1');
-        xlsWriteLabel(3,1,'Петр');
-        xlsWriteLabel(3,2,'Иванов');
-        /*...*/
-        xlsWriteNumber(32,0,'30');
-        xlsWriteLabel(32,1,'Иван');
-        xlsWriteLabel(32,2,'Петров');
-
-        xlsEOF(); //заканчиваем собирать
-        readfile('list.xls');
-        exit();
+        $download=get_list();
     }
 
     if (!isset($_POST['show_data'])) {
@@ -137,6 +113,7 @@ function get_all_group()
     }
     $template = file_get_contents(REG_GR_PLUGIN_DIR.'/admin_gr.html');
     $template=str_replace('{rows}',$tr,$template);
+    $template=str_replace('{download}',$download,$template);
 
     echo  $template;
 }

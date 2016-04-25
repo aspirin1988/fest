@@ -1,23 +1,213 @@
 /**
  * Created by serg on 30.03.16.
  */
+
+/**
+ * либа для маскировки полей (документация: https://github.com/digitalBush/jquery.maskedinput)
+ */
+!function(factory) {
+    "function" == typeof define && define.amd ? define([ "jquery" ], factory) : factory("object" == typeof exports ? require("jquery") : jQuery);
+}(function($) {
+    var caretTimeoutId, ua = navigator.userAgent, iPhone = /iphone/i.test(ua), chrome = /chrome/i.test(ua), android = /android/i.test(ua);
+    $.mask = {
+        definitions: {
+            "9": "[0-9]",
+            a: "[A-Za-z]",
+            "*": "[A-Za-z0-9]"
+        },
+        autoclear: !0,
+        dataName: "rawMaskFn",
+        placeholder: "_"
+    }, $.fn.extend({
+        caret: function(begin, end) {
+            var range;
+            if (0 !== this.length && !this.is(":hidden")) return "number" == typeof begin ? (end = "number" == typeof end ? end : begin,
+                this.each(function() {
+                    this.setSelectionRange ? this.setSelectionRange(begin, end) : this.createTextRange && (range = this.createTextRange(),
+                        range.collapse(!0), range.moveEnd("character", end), range.moveStart("character", begin),
+                        range.select());
+                })) : (this[0].setSelectionRange ? (begin = this[0].selectionStart, end = this[0].selectionEnd) : document.selection && document.selection.createRange && (range = document.selection.createRange(),
+                begin = 0 - range.duplicate().moveStart("character", -1e5), end = begin + range.text.length),
+            {
+                begin: begin,
+                end: end
+            });
+        },
+        unmask: function() {
+            return this.trigger("unmask");
+        },
+        mask: function(mask, settings) {
+            var input, defs, tests, partialPosition, firstNonMaskPos, lastRequiredNonMaskPos, len, oldVal;
+            if (!mask && this.length > 0) {
+                input = $(this[0]);
+                var fn = input.data($.mask.dataName);
+                return fn ? fn() : void 0;
+            }
+            return settings = $.extend({
+                autoclear: $.mask.autoclear,
+                placeholder: $.mask.placeholder,
+                completed: null
+            }, settings), defs = $.mask.definitions, tests = [], partialPosition = len = mask.length,
+                firstNonMaskPos = null, $.each(mask.split(""), function(i, c) {
+                "?" == c ? (len--, partialPosition = i) : defs[c] ? (tests.push(new RegExp(defs[c])),
+                null === firstNonMaskPos && (firstNonMaskPos = tests.length - 1), partialPosition > i && (lastRequiredNonMaskPos = tests.length - 1)) : tests.push(null);
+            }), this.trigger("unmask").each(function() {
+                function tryFireCompleted() {
+                    if (settings.completed) {
+                        for (var i = firstNonMaskPos; lastRequiredNonMaskPos >= i; i++) if (tests[i] && buffer[i] === getPlaceholder(i)) return;
+                        settings.completed.call(input);
+                    }
+                }
+                function getPlaceholder(i) {
+                    return settings.placeholder.charAt(i < settings.placeholder.length ? i : 0);
+                }
+                function seekNext(pos) {
+                    for (;++pos < len && !tests[pos]; ) ;
+                    return pos;
+                }
+                function seekPrev(pos) {
+                    for (;--pos >= 0 && !tests[pos]; ) ;
+                    return pos;
+                }
+                function shiftL(begin, end) {
+                    var i, j;
+                    if (!(0 > begin)) {
+                        for (i = begin, j = seekNext(end); len > i; i++) if (tests[i]) {
+                            if (!(len > j && tests[i].test(buffer[j]))) break;
+                            buffer[i] = buffer[j], buffer[j] = getPlaceholder(j), j = seekNext(j);
+                        }
+                        writeBuffer(), input.caret(Math.max(firstNonMaskPos, begin));
+                    }
+                }
+                function shiftR(pos) {
+                    var i, c, j, t;
+                    for (i = pos, c = getPlaceholder(pos); len > i; i++) if (tests[i]) {
+                        if (j = seekNext(i), t = buffer[i], buffer[i] = c, !(len > j && tests[j].test(t))) break;
+                        c = t;
+                    }
+                }
+                function androidInputEvent() {
+                    var curVal = input.val(), pos = input.caret();
+                    if (oldVal && oldVal.length && oldVal.length > curVal.length) {
+                        for (checkVal(!0); pos.begin > 0 && !tests[pos.begin - 1]; ) pos.begin--;
+                        if (0 === pos.begin) for (;pos.begin < firstNonMaskPos && !tests[pos.begin]; ) pos.begin++;
+                        input.caret(pos.begin, pos.begin);
+                    } else {
+                        for (checkVal(!0); pos.begin < len && !tests[pos.begin]; ) pos.begin++;
+                        input.caret(pos.begin, pos.begin);
+                    }
+                    tryFireCompleted();
+                }
+                function blurEvent() {
+                    checkVal(), input.val() != focusText && input.change();
+                }
+                function keydownEvent(e) {
+                    if (!input.prop("readonly")) {
+                        var pos, begin, end, k = e.which || e.keyCode;
+                        oldVal = input.val(), 8 === k || 46 === k || iPhone && 127 === k ? (pos = input.caret(),
+                            begin = pos.begin, end = pos.end, end - begin === 0 && (begin = 46 !== k ? seekPrev(begin) : end = seekNext(begin - 1),
+                            end = 46 === k ? seekNext(end) : end), clearBuffer(begin, end), shiftL(begin, end - 1),
+                            e.preventDefault()) : 13 === k ? blurEvent.call(this, e) : 27 === k && (input.val(focusText),
+                            input.caret(0, checkVal()), e.preventDefault());
+                    }
+                }
+                function keypressEvent(e) {
+                    if (!input.prop("readonly")) {
+                        var p, c, next, k = e.which || e.keyCode, pos = input.caret();
+                        if (!(e.ctrlKey || e.altKey || e.metaKey || 32 > k) && k && 13 !== k) {
+                            if (pos.end - pos.begin !== 0 && (clearBuffer(pos.begin, pos.end), shiftL(pos.begin, pos.end - 1)),
+                                    p = seekNext(pos.begin - 1), len > p && (c = String.fromCharCode(k), tests[p].test(c))) {
+                                if (shiftR(p), buffer[p] = c, writeBuffer(), next = seekNext(p), android) {
+                                    var proxy = function() {
+                                        $.proxy($.fn.caret, input, next)();
+                                    };
+                                    setTimeout(proxy, 0);
+                                } else input.caret(next);
+                                pos.begin <= lastRequiredNonMaskPos && tryFireCompleted();
+                            }
+                            e.preventDefault();
+                        }
+                    }
+                }
+                function clearBuffer(start, end) {
+                    var i;
+                    for (i = start; end > i && len > i; i++) tests[i] && (buffer[i] = getPlaceholder(i));
+                }
+                function writeBuffer() {
+                    input.val(buffer.join(""));
+                }
+                function checkVal(allow) {
+                    var i, c, pos, test = input.val(), lastMatch = -1;
+                    for (i = 0, pos = 0; len > i; i++) if (tests[i]) {
+                        for (buffer[i] = getPlaceholder(i); pos++ < test.length; ) if (c = test.charAt(pos - 1),
+                                tests[i].test(c)) {
+                            buffer[i] = c, lastMatch = i;
+                            break;
+                        }
+                        if (pos > test.length) {
+                            clearBuffer(i + 1, len);
+                            break;
+                        }
+                    } else buffer[i] === test.charAt(pos) && pos++, partialPosition > i && (lastMatch = i);
+                    return allow ? writeBuffer() : partialPosition > lastMatch + 1 ? settings.autoclear || buffer.join("") === defaultBuffer ? (input.val() && input.val(""),
+                        clearBuffer(0, len)) : writeBuffer() : (writeBuffer(), input.val(input.val().substring(0, lastMatch + 1))),
+                        partialPosition ? i : firstNonMaskPos;
+                }
+                var input = $(this), buffer = $.map(mask.split(""), function(c, i) {
+                    return "?" != c ? defs[c] ? getPlaceholder(i) : c : void 0;
+                }), defaultBuffer = buffer.join(""), focusText = input.val();
+                input.data($.mask.dataName, function() {
+                    return $.map(buffer, function(c, i) {
+                        return tests[i] && c != getPlaceholder(i) ? c : null;
+                    }).join("");
+                }), input.one("unmask", function() {
+                    input.off(".mask").removeData($.mask.dataName);
+                }).on("focus.mask", function() {
+                    if (!input.prop("readonly")) {
+                        clearTimeout(caretTimeoutId);
+                        var pos;
+                        focusText = input.val(), pos = checkVal(), caretTimeoutId = setTimeout(function() {
+                            input.get(0) === document.activeElement && (writeBuffer(), pos == mask.replace("?", "").length ? input.caret(0, pos) : input.caret(pos));
+                        }, 10);
+                    }
+                }).on("blur.mask", blurEvent).on("keydown.mask", keydownEvent).on("keypress.mask", keypressEvent).on("input.mask paste.mask", function() {
+                    input.prop("readonly") || setTimeout(function() {
+                        var pos = checkVal(!0);
+                        input.caret(pos), tryFireCompleted();
+                    }, 0);
+                }), chrome && android && input.off("input.mask").on("input.mask", androidInputEvent),
+                    checkVal();
+            });
+        }
+    });
+});
+
+jQuery(function($) {
+    //маскировка поля телефона
+    $('.masked').mask('+7(999) 999-99-99', {
+        autoclear: true,
+        placeholder: 'x',
+        completed:function(){
+        }
+
+    });
+});
+
+var jqrequest;
 var group;
 var them_all=[];
 $(document).ready(function (){
 
-    $('#type-them').click(function(){
+    var plEmpty = $('.placeholder-empty');
+    var plNotFound = $('.placeholder-not-found');
+
+    $('.type-them').click(function(){
         var data ={};
-        var select=$(this).val();
-        data['subjects_type']=select;
+        var select=$(this).data('type');
+        console.info(data);
+        data['subjects_type']=1;
         $("#del_item").remove();
 
-            if (select==2)
-            {
-                $('.col-md-12.one').hide();
-                $('.col-md-12.two').show();
-            }
-            else
-            {
                 $.ajax({
                     url: "/index.php/grouprg",
                     type: "POST",
@@ -30,67 +220,101 @@ $(document).ready(function (){
                     });
                     console.log(them_all);
                 });
-                $('.col-md-12.one').show();
-                $('.col-md-12.two').hide();
-            }
-
-
 
     });
 
     $('#subjects_name').keyup(function(){
-        isset=0;
-        var enter=$(this).val();
-        var isset;
+        //$.xhrPool.abortAll();
+        if(jqrequest){
+            jqrequest.abort();
+        }
+        var element = $(this).val().toLowerCase();
         var obj=$('#find-list');
-        obj.empty();
-        if (enter.length>2) {
-            enter = enter.toLowerCase();
+
+        if (element.length > 2){
+
             var data={};
-            data['subjects_type']=$('#type-them').val();
-            data['enter']=enter;
-            $.ajax({
+            data['subjects_type']=2;
+            data['enter']=element;
+            jqrequest = $.ajax({
                 url: "/index.php/grouprg",
                 type: "POST",
                 data: data
-            }).done(function(data1) {
-                them_all = data1;
-                /*$('#them').empty();
-                $.each(data1, function (key, val) {
-                    $('#them').append($("<option value='" + val['id_direct'] + "' >" + val['name'] + "</option>"));
-                });*/
+            }).done(function(result) {
+                if(Object.keys(result).length){
+                        obj.empty();
+                        $.each(result, function (key, val) {
+                        val['name'] = val['name'].toLowerCase();
+                        //obj.append($('<li class="form-control" data-name="' + val['name'] + '" data-id="' + val['id_direct'] + '">' + val['name'] + '</li>'));
+                            console.info(val);
+                        obj.append($('<li/>',{
+                            class: 'form-control'
+                        })
+                            .append($('<a/>',{
+                                class:'saint-name',
+                                'data-name': val['name'],
+                                'data-id': val['id'],
+                                text: val['name']
+                            })
+                        )
+                            .append($('<a/>',{
+                                class: 'saint-href pull-right',
+                                'data-name': val['name'],
+                                'data-id': val['id'],
+                                'data-description': val['description'],
+                                'data-href': val['href']
+                            })
+                                .append($('<i/>',{
+                                    class: 'fa fa-link'
+                                })))
 
-            console.info(them_all);
-            var count =1;
-            $.each(data1, function (key, val) {
-                val['name'] = val['name'].toLowerCase();
-                //val['name'] = val['name'].toLowerCase();
-                var isset_1 = val['name'].indexOf(enter) + 1;
-                console.log(isset_1);
-                if (isset_1) {
-                    if(count<=3){
-                    obj.append($('<li class="form-control" data-name="' + val['name'] + '" data-id="' + val['id_direct'] + '">' + val['name'] + '</li>'));
-                    isset = isset_1;
+                        );
+                    });
+                    $('#find-list .saint-name').unbind('click').click(function(){
+                        console.info($(this).data('id'));
+                        $('#subjects_name').val($(this).data('name'));
+                        $('#subjects_2').val($(this).data('id'));
+                    });
+                    //obj.addClass('visible');
                 }
-                    count++;
-            }
-            });
+                else{
+                    obj.html(plNotFound);
+                }
 
-            if (isset) {
-                $('#find-list li').click(function(){
-                    console.info($(this).data('id'));
-                    $('#subjects_name').val($(this).data('name'));
-                    $('#subjects_2').val($(this).data('id'));
-                    $('#find-list').hide();
-                });
-                obj.show();
-            }
             });
+        }
+        else{
+            obj.html(plEmpty);
         }
 
     });
 
-    $('#add_group').click(function(){
+    $('#add-saint').click(function (e) {
+        e.preventDefault();
+       var saintdata = $('#add-saint-modal form').serialize();
+        console.info(saintdata);
+        /*$.ajax({
+            url: "/index.php",
+            type: "POST",
+            data: saintdata
+        }).done(function(saint_data) {
+            console.info(saint_data);
+        }).error(function(data){
+            console.info(data);
+        });*/
+        console.log(JSON.stringify(saintdata));
+        $.post('/index.php/grouprg', {data:saintdata}, function(data) {
+            console.log(typeof(data));
+        },true);
+    });
+
+    $(document).on('hidden.bs.modal', '.modal', function () {
+        $('.modal:visible').length && $(document.body).addClass('modal-open');
+    });
+
+
+
+    /*$('#add_group').click(function(){
         var data={};
         var form=$('#group_add');
         var input=form.find('input');
@@ -120,11 +344,9 @@ $(document).ready(function (){
                 setTimeout(function(){$('#reg-group').modal('hide');  $('#myCarousel').carousel(0);  $('#mess').hide();},1000);
             }
         });
+    });*/
 
-        //console.log(select);
-    });
-
-    $('#gr').click(function(){
+/*    $('#gr').click(function(){
         var data ={};
         var select=$(this).val();
         data['show_gr']=select;
@@ -167,7 +389,7 @@ $(document).ready(function (){
             }
         });
 
-    });
+    });*/
 
 
     //$('#group-id').click(function(){

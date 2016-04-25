@@ -227,3 +227,28 @@ function get_user_gr($id)
     $res=$wpdb->get_results('SELECT (SELECT g.name FROM group_registration g where u.user_reg_gr=g.id_group)as name,(SELECT g1.id_group FROM group_registration g1 where u.user_reg_gr=g1.id_group)as id from wp_users u WHERE u.ID='.$id);
     return $res[0];
 }
+
+function get_list()
+{
+    require_once 'Classes/PHPExcel.php'; // Подключаем библиотеку PHPExcel
+    $phpexcel = new PHPExcel(); // Создаём объект PHPExcel
+    /* Каждый раз делаем активной 1-ю страницу и получаем её, потом записываем в неё данные */
+    $page = $phpexcel->setActiveSheetIndex(0); // Делаем активной первую страницу и получаем её
+    $page->setCellValueByColumnAndRow(1,1, "Id group");
+//    id_group,name,name_boss,name_confessor,san_confessor,region,city,address_parish,name_parish,number_of_persons,age_from,age_to,total_number_of_persons,subjects,subjects_type,creator,command_type,eparhy,leader_phone,leader_email,leder_contacts,confessor_phone,confessor_email,confessor_contacts,advanced_data,approved,count
+    $page->setCellValueByColumnAndRow(2,1, "Название групы");
+    print_r(show_all_gr());
+    foreach (show_all_gr() as  $key =>$value){
+        $page->setCellValueByColumnAndRow(1,$key+1, $value->id_group);
+        $page->setCellValueByColumnAndRow(2,$key+1, $value->name);
+    }
+    $page->setTitle("list_group"); // Ставим заголовок "Test" на странице
+    /* Начинаем готовиться к записи информации в xlsx-файл */
+    $objWriter = PHPExcel_IOFactory::createWriter($phpexcel, 'Excel2007');
+    /* Записываем в файл */
+    $file=ABSPATH."wp-content/uploads/list.xlsx";
+    $path ='/wp-content/uploads/list.xlsx';
+    $objWriter->save($file);
+
+    return '<a download="" href="'.$path.'" >Скачать</a>';
+}
