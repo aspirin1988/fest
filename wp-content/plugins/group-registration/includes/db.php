@@ -331,36 +331,13 @@ function get_list()
     {
         $page->getStyleByColumnAndRow($i,1)->getBorders()->applyFromArray($br_s_h);
     }
-//    ,,,,,,,,,,,,,,,,,,,,,,,,,
-
     foreach ($data as  $key =>$value){
-        $page->setCellValueByColumnAndRow(0,$key+2, $value->id_group);
-        $page->setCellValueByColumnAndRow(1,$key+2, $value->name);
-        $page->setCellValueByColumnAndRow(2,$key+2, $value->name_boss);
-        $page->setCellValueByColumnAndRow(3,$key+2, $value->name_confessor);
-        $page->setCellValueByColumnAndRow(4,$key+2, $value->san_confessor);
-        $page->setCellValueByColumnAndRow(5,$key+2, $value->region);
-        $page->setCellValueByColumnAndRow(6,$key+2, $value->city);
-        $page->setCellValueByColumnAndRow(7,$key+2, $value->address_parish);
-        $page->setCellValueByColumnAndRow(8,$key+2, $value->name_parish);
-        $page->setCellValueByColumnAndRow(9,$key+2, $value->number_of_persons);
-        $page->setCellValueByColumnAndRow(10,$key+2, $value->age_from);
-        $page->setCellValueByColumnAndRow(11,$key+2, $value->age_to);
-        $page->setCellValueByColumnAndRow(12,$key+2, $value->total_number_of_persons);
-        $page->setCellValueByColumnAndRow(13,$key+2, $value->subjects);
-        $page->setCellValueByColumnAndRow(14,$key+2, $value->subjects_type);
-        $page->setCellValueByColumnAndRow(15,$key+2, $value->creator);
-        $page->setCellValueByColumnAndRow(16,$key+2, $value->command_type);
-        $page->setCellValueByColumnAndRow(17,$key+2, $value->eparhy);
-        $page->setCellValueByColumnAndRow(18,$key+2, $value->leader_phone);
-        $page->setCellValueByColumnAndRow(19,$key+2, $value->leader_email);
-        $page->setCellValueByColumnAndRow(20,$key+2, $value->leder_contacts);
-        $page->setCellValueByColumnAndRow(21,$key+2, $value->confessor_phone);
-        $page->setCellValueByColumnAndRow(22,$key+2, $value->confessor_email);
-        $page->setCellValueByColumnAndRow(23,$key+2, $value->confessor_contacts);
-        $page->setCellValueByColumnAndRow(24,$key+2, $value->advanced_data);
-        $page->setCellValueByColumnAndRow(25,$key+2, $value->approved);
-        $page->setCellValueByColumnAndRow(26,$key+2, $value->count);
+        $j=0;
+        foreach ((array)$value as  $key1 =>$value1) {
+            $page->setCellValueByColumnAndRow($j, $key + 2, $value1);
+            $j++;
+        }
+
         for($i=0;$i<=count((array)$data[0])-1;$i++)
         {
             $page->getStyleByColumnAndRow($i,$key+2)->getBorders()->applyFromArray($br_s_t);
