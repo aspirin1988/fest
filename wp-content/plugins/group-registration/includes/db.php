@@ -116,7 +116,10 @@ function add_direct($id,$name,$description,$creator,$href)
     if (!$su) {
         $sql = "Insert into directory_$id (name,description,creator,href) values ('$name','$description','$creator->ID','$href')";
         $wpdb->query($sql);
-        return $wpdb->get_results('Select MAX(id_direct) as id from directory_'.$id);
+        $max=$wpdb->get_results('Select MAX(id_direct) as id from directory_'.$id);
+        $max=$wpdb->get_results("Select *  from directory_".$id." where id_direct='".$max[0]->id."'");
+        return $max[0];
+
     }
     else
     {
