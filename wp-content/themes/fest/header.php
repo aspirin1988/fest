@@ -12,6 +12,7 @@ $user_gr=get_user_gr($current_user->ID);
 <head>
 	<meta charset="UTF-8">
 	<title><?php bloginfo('title'); ?></title>
+	<link rel="shortcut icon" href="<?php the_field('Logo') ?>" type="image/x-icon">
 	<link rel="stylesheet" href="<?php bloginfo('template_directory');?>/public/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php bloginfo('template_directory');?>/public/fonts/triod.css">
 	<link rel="stylesheet" href="<?php bloginfo('template_directory');?>/public/css/my.css">

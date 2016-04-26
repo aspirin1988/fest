@@ -196,6 +196,14 @@ function show_all_gr()
     return $ret;
 }
 
+function show_all_gr_print()
+{
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    global $wpdb;
+    $res=$wpdb->get_results('SELECT g.*,(SELECT count(*) FROM wp_users u where u.user_reg_gr=g.id_group)as "count" from group_registration g');
+    return $res;
+}
+
 function show_all_gr_apr()
 {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -234,18 +242,131 @@ function get_user_gr($id)
 
 function get_list()
 {
+
     require_once 'Classes/PHPExcel.php'; // Подключаем библиотеку PHPExcel
     $phpexcel = new PHPExcel(); // Создаём объект PHPExcel
+    $br_s_t=array(
+        'bottom'     => array(
+            'style' => PHPExcel_Style_Border::BORDER_THIN,
+            'color' => array(
+                '	rgb' => '000000'
+            )
+        ),
+        'top'     => array(
+            'style' => PHPExcel_Style_Border::BORDER_THIN,
+            'color' => array(
+                'rgb' => '000000'
+            )
+        ),
+        'left'     => array(
+            'style' => PHPExcel_Style_Border::BORDER_THIN,
+            'color' => array(
+                'rgb' => '000000'
+            )
+        ),
+        'right'     => array(
+            'style' => PHPExcel_Style_Border::BORDER_THIN,
+            'color' => array(
+                'rgb' => '000000'
+            )
+        )
+    );
+    $br_s_h=array(
+        'bottom'     => array(
+            'style' => PHPExcel_Style_Border::BORDER_THICK,
+            'color' => array(
+                '	rgb' => '000000'
+            )
+        ),
+        'top'     => array(
+            'style' => PHPExcel_Style_Border::BORDER_THICK,
+            'color' => array(
+                'rgb' => '000000'
+            )
+        ),
+        'left'     => array(
+            'style' => PHPExcel_Style_Border::BORDER_THICK,
+            'color' => array(
+                'rgb' => '000000'
+            )
+        ),
+        'right'     => array(
+            'style' => PHPExcel_Style_Border::BORDER_THICK,
+            'color' => array(
+                'rgb' => '000000'
+            )
+        )
+    );
+    $data=show_all_gr_print();
     /* Каждый раз делаем активной 1-ю страницу и получаем её, потом записываем в неё данные */
     $page = $phpexcel->setActiveSheetIndex(0); // Делаем активной первую страницу и получаем её
-    $page->setCellValueByColumnAndRow(1,1, "Id group");
-//    id_group,name,name_boss,name_confessor,san_confessor,region,city,address_parish,name_parish,number_of_persons,age_from,age_to,total_number_of_persons,subjects,subjects_type,creator,command_type,eparhy,leader_phone,leader_email,leder_contacts,confessor_phone,confessor_email,confessor_contacts,advanced_data,approved,count
-    $page->setCellValueByColumnAndRow(2,1, "Название групы");
-    print_r(show_all_gr());
-    foreach (show_all_gr() as  $key =>$value){
-        $page->setCellValueByColumnAndRow(1,$key+1, $value->id_group);
-        $page->setCellValueByColumnAndRow(2,$key+1, $value->name);
+    $page->setCellValueByColumnAndRow(0,1, "Id групы");
+    $page->setCellValueByColumnAndRow(1,1, "Название групы");
+    $page->setCellValueByColumnAndRow(2,1, "name_boss");
+    $page->setCellValueByColumnAndRow(3,1, "name_confessor");
+    $page->setCellValueByColumnAndRow(4,1, "san_confessor");
+    $page->setCellValueByColumnAndRow(5,1, "region");
+    $page->setCellValueByColumnAndRow(6,1, "city");
+    $page->setCellValueByColumnAndRow(7,1, "address_parish");
+    $page->setCellValueByColumnAndRow(8,1, "name_parish");
+    $page->setCellValueByColumnAndRow(9,1, "number_of_persons");
+    $page->setCellValueByColumnAndRow(10,1, "age_from");
+    $page->setCellValueByColumnAndRow(11,1, "age_to");
+    $page->setCellValueByColumnAndRow(12,1, "total_number_of_persons");
+    $page->setCellValueByColumnAndRow(13,1, "subjects");
+    $page->setCellValueByColumnAndRow(14,1, "subjects_type");
+    $page->setCellValueByColumnAndRow(15,1, "creator");
+    $page->setCellValueByColumnAndRow(16,1, "command_type");
+    $page->setCellValueByColumnAndRow(17,1, "eparhy");
+    $page->setCellValueByColumnAndRow(18,1, "leader_phone");
+    $page->setCellValueByColumnAndRow(19,1, "leader_email");
+    $page->setCellValueByColumnAndRow(20,1, "leder_contacts");
+    $page->setCellValueByColumnAndRow(21,1, "confessor_phone");
+    $page->setCellValueByColumnAndRow(22,1, "confessor_email");
+    $page->setCellValueByColumnAndRow(23,1, "confessor_contacts");
+    $page->setCellValueByColumnAndRow(24,1, "advanced_data");
+    $page->setCellValueByColumnAndRow(25,1, "approved");
+    $page->setCellValueByColumnAndRow(26,1, "count");
+    for($i=0;$i<=count((array)$data[0])-1;$i++)
+    {
+        $page->getStyleByColumnAndRow($i,1)->getBorders()->applyFromArray($br_s_h);
     }
+//    ,,,,,,,,,,,,,,,,,,,,,,,,,
+
+    foreach ($data as  $key =>$value){
+        $page->setCellValueByColumnAndRow(0,$key+2, $value->id_group);
+        $page->setCellValueByColumnAndRow(1,$key+2, $value->name);
+        $page->setCellValueByColumnAndRow(2,$key+2, $value->name_boss);
+        $page->setCellValueByColumnAndRow(3,$key+2, $value->name_confessor);
+        $page->setCellValueByColumnAndRow(4,$key+2, $value->san_confessor);
+        $page->setCellValueByColumnAndRow(5,$key+2, $value->region);
+        $page->setCellValueByColumnAndRow(6,$key+2, $value->city);
+        $page->setCellValueByColumnAndRow(7,$key+2, $value->address_parish);
+        $page->setCellValueByColumnAndRow(8,$key+2, $value->name_parish);
+        $page->setCellValueByColumnAndRow(9,$key+2, $value->number_of_persons);
+        $page->setCellValueByColumnAndRow(10,$key+2, $value->age_from);
+        $page->setCellValueByColumnAndRow(11,$key+2, $value->age_to);
+        $page->setCellValueByColumnAndRow(12,$key+2, $value->total_number_of_persons);
+        $page->setCellValueByColumnAndRow(13,$key+2, $value->subjects);
+        $page->setCellValueByColumnAndRow(14,$key+2, $value->subjects_type);
+        $page->setCellValueByColumnAndRow(15,$key+2, $value->creator);
+        $page->setCellValueByColumnAndRow(16,$key+2, $value->command_type);
+        $page->setCellValueByColumnAndRow(17,$key+2, $value->eparhy);
+        $page->setCellValueByColumnAndRow(18,$key+2, $value->leader_phone);
+        $page->setCellValueByColumnAndRow(19,$key+2, $value->leader_email);
+        $page->setCellValueByColumnAndRow(20,$key+2, $value->leder_contacts);
+        $page->setCellValueByColumnAndRow(21,$key+2, $value->confessor_phone);
+        $page->setCellValueByColumnAndRow(22,$key+2, $value->confessor_email);
+        $page->setCellValueByColumnAndRow(23,$key+2, $value->confessor_contacts);
+        $page->setCellValueByColumnAndRow(24,$key+2, $value->advanced_data);
+        $page->setCellValueByColumnAndRow(25,$key+2, $value->approved);
+        $page->setCellValueByColumnAndRow(26,$key+2, $value->count);
+        for($i=0;$i<=count((array)$data[0])-1;$i++)
+        {
+            $page->getStyleByColumnAndRow($i,$key+2)->getBorders()->applyFromArray($br_s_t);
+        }
+    }
+
     $page->setTitle("list_group"); // Ставим заголовок "Test" на странице
     /* Начинаем готовиться к записи информации в xlsx-файл */
     $objWriter = PHPExcel_IOFactory::createWriter($phpexcel, 'Excel2007');
@@ -254,5 +375,5 @@ function get_list()
     $path ='/wp-content/uploads/list.xlsx';
     $objWriter->save($file);
 
-    return '<a download="" href="'.$path.'" >Скачать</a>';
+    return '<a id="download" style="display:none;" download="" href="'.$path.'" >Скачать</a>';
 }

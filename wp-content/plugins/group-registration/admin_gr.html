@@ -73,7 +73,7 @@
 
     </style>
     <form action="" method="post" >
-        <input download="" type="submit" name="download">
+        <input download="" type="submit" name="download" value="Скачать список команд">
         {download}
     </form>
     <br>
@@ -106,6 +106,10 @@
             mess.classList.add('hide');
         }
 
+    }
+    var download = document.getElementById('download');
+    if (download) {
+        download.click();
     }
 </script>
 
