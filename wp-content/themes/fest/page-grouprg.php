@@ -3,15 +3,12 @@
 header('Content-Type: application/json');
 //echo json_encode($_POST);
 //Добавление новой группы
-if (isset($_POST['data'])) {
-    echo $_POST['data'];
-    $data=unserialize($_POST['data']);
-
-   /* global $current_user;
+if (isset($_POST['add_direct'])) {
+    global $current_user;
     get_currentuserinfo();
-    echo json_encode($_POST);*/
-    //echo json_encode(add_direct(2, (string)$_POST['name'], (string)$_POST['description'], $current_user,$_POST['href']));
-    }
+    echo json_encode(add_direct(2, (string)$_POST['dbg_name'], (string)$_POST['description'], $current_user,$_POST['href']));
+    die();
+   }
 
 if (isset($_POST['add_group']))
 {

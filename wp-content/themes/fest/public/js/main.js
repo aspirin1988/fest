@@ -197,6 +197,15 @@ var jqrequest;
 var group;
 var them_all=[];
 $(document).ready(function (){
+    $('.command-carousel').on('slide.bs.carousel', function (e) {
+        console.info($(this));
+        $('.command-carousel .item').removeClass('zoomIn').addClass('zoomOut');
+        $(e.relatedTarget).removeClass('zoomOut').addClass('zoomIn');
+        /*console.info($(e.target).addClass('zoomIn'));
+        console.info($(e.delegateTarget).addClass('animated zoomOut'));*/
+        console.info(e);
+        //return false;
+    });
 
     var plEmpty = $('.placeholder-empty');
     var plNotFound = $('.placeholder-not-found');
@@ -270,6 +279,22 @@ $(document).ready(function (){
 
                         );
                     });
+
+                    $('#find-list .saint-href').unbind('click').click(function () {
+                            var that = $(this);
+                        $('.saint-info .modal-title').html(that.data('name'));
+                        $('.saint-info .modal-body').html($('<div/>',{
+                            class:'text-justify',
+                            html: that.data('description')
+                        })).append($('<a/>',{
+                            class: 'btn btn-success',
+                            href: that.data('href'),
+                            html:'посмотреть подробнее',
+                            target: '_blank',
+                            style: 'margin: 20px;'
+                        }));
+                        $('.saint-info').modal();
+                    });
                     $('#find-list .saint-name').unbind('click').click(function(){
                         console.info($(this).data('id'));
                         $('#subjects_name').val($(this).data('name'));
@@ -289,31 +314,26 @@ $(document).ready(function (){
 
     });
 
-    $('#add-saint').click(function (e) {
-        e.preventDefault();
+    $('#add-saint').click(function () {
        var saintdata = $('#add-saint-modal form').serialize();
         console.info(saintdata);
-        /*$.ajax({
-            url: "/index.php",
+        $.ajax({
+            url: "/index.php/grouprg",
             type: "POST",
             data: saintdata
         }).done(function(saint_data) {
             console.info(saint_data);
-        }).error(function(data){
-            console.info(data);
+        });
+
+        /*$.post('/index.php/grouprg', saintdata, function(dar){
+           console.info(dar) ;
         });*/
-        console.log(JSON.stringify(saintdata));
-        $.post('/index.php/grouprg', {data:saintdata}, function(data) {
-            console.log(typeof(data));
-        },true);
+
     });
 
     $(document).on('hidden.bs.modal', '.modal', function () {
         $('.modal:visible').length && $(document.body).addClass('modal-open');
     });
-
-
-
     /*$('#add_group').click(function(){
         var data={};
         var form=$('#group_add');
@@ -397,3 +417,4 @@ $(document).ready(function (){
     //});
 
 });
+
