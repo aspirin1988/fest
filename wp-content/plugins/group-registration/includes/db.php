@@ -326,7 +326,9 @@ function get_list()
     $page->setCellValueByColumnAndRow(23,1, "confessor_contacts");
     $page->setCellValueByColumnAndRow(24,1, "advanced_data");
     $page->setCellValueByColumnAndRow(25,1, "approved");
-    $page->setCellValueByColumnAndRow(26,1, "count");
+    $page->setCellValueByColumnAndRow(26,1, "geoposition");
+    $page->setCellValueByColumnAndRow(27,1, "leader_profession");
+    $page->setCellValueByColumnAndRow(28,1, "count");
     for($i=0;$i<=count((array)$data[0])-1;$i++)
     {
         $page->getStyleByColumnAndRow($i,1)->getBorders()->applyFromArray($br_s_h);

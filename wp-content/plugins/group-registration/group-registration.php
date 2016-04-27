@@ -40,7 +40,7 @@ function add_menu()  {
     //add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function )
     add_submenu_page( REG_GR_PLUGIN_FOLDER , 'Add_group', 'Add group', 1, REG_GR_PLUGIN_FOLDER,'get_main');
     add_submenu_page( REG_GR_PLUGIN_FOLDER , 'Add_advanced_group', 'Add advanced group', 2, 'index','get_main1');
-    add_submenu_page( REG_GR_PLUGIN_FOLDER , 'Add_advanced_group', 'Add advanced group', 3, 'index1','get_all_group');
+    add_submenu_page( REG_GR_PLUGIN_FOLDER , 'Show_all_group', 'Show all group', 3, 'index1','get_all_group');
 }
 function reg_param()
 {
@@ -104,7 +104,7 @@ function get_all_group()
             $sel='';
         }
 
-        $tr.='<form name="edit" method="post" action=""><tr><td>'.$value->id_group.'</td><td><input type="text" name="name" value="'.$value->name_boss.'"></td><td><textarea type="" name="description">'.$value->description.'</textarea></td><td>'.$user->data->display_name.'</td><td><input type="checkbox" '.$sel.'"></td><td><input type="submit" class="del" name="refusal" value="'.$value->id_group.'"><input type="submit" class="edit" name="approve" value="'.$value->id_group.'"><input type="submit" class="show" name="show_data" value="'.$value->id_group.'"></td></tr></form>';
+        $tr.='<form name="edit" method="post" action=""><tr><td>'.$value->id_group.'</td><td><input type="text" name="name" value="'.$value->name.'"></td><td><textarea type="" name="description">'.$value->description.'</textarea></td><td>'.$user->data->display_name.'</td><td><input type="checkbox" '.$sel.'"></td><td>'.$value->count.'</td><td><input type="submit" class="del" name="refusal" value="'.$value->id_group.'"><input type="submit" class="edit" name="approve" value="'.$value->id_group.'"><input type="submit" class="show" name="show_data" value="'.$value->id_group.'"></td></tr></form>';
         if(isset($_POST['show_data'])&&$_POST['show_data']==$value->id_group)
         {
             print_r($value);
