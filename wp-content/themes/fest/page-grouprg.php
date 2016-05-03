@@ -46,13 +46,14 @@ $ins=[
 'confessor_contacts'=>$_POST['confessor_contacts'],
 'advanced_data'=>$_POST['advanced_data'],
 'geoposition'=>$_POST['geoposition'],
-'leader_profession'=>$_POST['leader_profession']
+'leader_profession'=>$_POST['leader_profession'],
+'eparhy'=>$_POST['$eparhy'],
 ];
 
     global $current_user;
     get_currentuserinfo();
     //print_r($ins);
-    $res=add_group($current_user,$ins['name'],$current_user->ID,$ins['name_boss'],$ins['name_confessor'],$ins['san_confessor'],$ins['region'],$ins['city'],$ins['address_parish'],$ins['name_parish'],$ins['number_of_persons'],$ins['age_from'],$ins['age_to'],$ins['total_number_of_persons'],$ins['subjects'],$ins['subjects_type'],$_POST['command_type'],$_POST['leader_phone'],$_POST['leader_email'],$_POST['leder_contacts'],$_POST['confessor_phone'],$_POST['confessor_email'],$_POST['confessor_contacts'],$_POST['advanced_data'],$_POST['geoposition'],$_POST['leader_profession']);
+    $res=add_group($current_user,$ins['name'],$current_user->ID,$ins['name_boss'],$ins['name_confessor'],$ins['san_confessor'],$ins['region'],$ins['city'],$ins['address_parish'],$ins['name_parish'],$ins['number_of_persons'],$ins['age_from'],$ins['age_to'],$ins['total_number_of_persons'],$ins['subjects'],$ins['subjects_type'],$ins['command_type'],$ins['leader_phone'],$ins['leader_email'],$ins['leder_contacts'],$ins['confessor_phone'],$ins['confessor_email'],$ins['confessor_contacts'],$ins['advanced_data'],$ins['geoposition'],$ins['leader_profession'],$ins['eparhy']);
     echo json_encode($res);
 }
 
